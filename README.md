@@ -11,7 +11,7 @@ The core/base package for my Magento 2 module development.
 Facts
 -----
 
- * Version: 0.1.0 (Development)
+ * Version: 0.1.1 (Development)
  * [Repository on Github](https://github.com/iods/iods-core)
 
 

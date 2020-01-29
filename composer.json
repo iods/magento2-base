@@ -15,5 +15,6 @@
     "psr-4": {
       "Darkstar\\Core\\": ""
     }
-  }
+  },
+  "version": "0.1.1"
 }
