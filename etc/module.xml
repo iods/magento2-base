@@ -5,13 +5,14 @@
  * Do not edit or add to this file if you wish to upgrade the modules in the
  * Darkstar M2 Suite to newer versions in the future.
  *
- * @category  Darkstar
- * @package   Darkstar\Core
+ * @category  Iods
+ * @package   Iods_Core
  * @author    Rye Miller <rye@drkstr.dev>
  * @copyright Copyright (c) 2020, Rye Miller (http://ryemiller.io)
  * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Darkstar_Core" setup_version="1.0.0" />
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Iods_Core" setup_version="0.1.0" />
 </config>
