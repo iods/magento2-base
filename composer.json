@@ -2,16 +2,16 @@
   "name": "iods/module-core",
   "description": "Core/base module for Iods M2 Suite.",
   "type": "magento2-module",
+  "homepage": "http://ryemiller.io",
   "license": [
     "MIT"
   ],
   "require": {
-    "php": "~7.0|~7.1|~7.2|~7.3|~7.4"
+    "php": "~7.0|~7.1|~7.2|~7.3|~7.4",
+    "iods/module-bones": "~1.2"
   },
   "autoload": {
-    "files": [
-      "registration.php"
-    ],
+    "files": ["registration.php"],
     "psr-4": {
       "Darkstar\\Core\\": ""
     }
