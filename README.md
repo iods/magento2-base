@@ -7,7 +7,7 @@ The core/base package for my Magento 2 module development.
 Facts
 -----
 
- * Version: 0.1.1 (Development)
+ * Version: 1.1.1 (Development)
  * [Repository on Github](https://github.com/iods/magento2-core)
 
 
@@ -39,7 +39,7 @@ Developer
 Support
 -------
 
-If you have any issues with this module, open an issue on [Github](https://github.com/iods/iods-core/issues)
+If you have any issues with this module, open an issue on [Github](https://github.com/iods/magento2-core/issues)
 
 
 Versioning

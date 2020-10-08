@@ -6,6 +6,7 @@
  *
  * @category  Iods
  * @package   Iods_Core
+ * @version   1.1.1
  * @author    Rye Miller <rye@drkstr.dev>
  * @copyright Copyright (c) 2020, Rye Miller (http://ryemiller.io)
  * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
