@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * DISCLAIMER
- * Do not edit or add to this file if you wish to upgrade the modules in the
- * Darkstar suite to newer versions in the future.
+ * Do not edit or add to this file if you wish to upgrade the modules
+ * in the Darkstar Magento 2 Suite to newer versions in the future.
  *
  * @category  Iods
  * @package   Iods_Core

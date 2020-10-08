@@ -1,7 +1,3 @@
-[![forthebadge](https://forthebadge.com/images/badges/built-by-neckbeards.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com)
-
 Core Module for Magento 2 
 =========================
 
@@ -12,7 +8,7 @@ Facts
 -----
 
  * Version: 0.1.1 (Development)
- * [Repository on Github](https://github.com/iods/iods-core)
+ * [Repository on Github](https://github.com/iods/magento2-core)
 
 
 Description
@@ -46,13 +42,6 @@ Support
 If you have any issues with this module, open an issue on [Github](https://github.com/iods/iods-core/issues)
 
 
-Contribution
-------------
-
-For instructions and/or guidelines on contributing check the [CONTRIBUTING.md](https://github.com/iods/iods-core/CONTRIBUTING.md) 
-file. Any contribution is highly appreciated. The best way to contribute code is to contact the [developer](#Developer).
-
-
 Versioning
 ----------
 
@@ -60,10 +49,10 @@ For transparency into the release cycle and in striving to maintain backward com
 maintained under [the Semantic Versioning guidelines](http://semver.org/).
 
 
-Acknowledgements
-----------------
+License
+-------
 
-Thank you to [Atlassian](http://www.atlassian.com) for being such an honest and innovative company.
+This project/code is released under [the MIT license](https://github.com/iods/magento2-bones/LICENSE).
 
 
 Copyright
