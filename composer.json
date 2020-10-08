@@ -1,12 +1,12 @@
 {
-  "name": "iods/core",
-  "description": "Core/base module for M2 extension builds.",
+  "name": "iods/module-core",
+  "description": "Core/base module for Iods M2 Suite.",
   "type": "magento2-module",
   "license": [
     "MIT"
   ],
   "require": {
-    "php": "~7.0.0|~7.1.0|~7.2.0"
+    "php": "~7.0|~7.1|~7.2|~7.3|~7.4"
   },
   "autoload": {
     "files": [
