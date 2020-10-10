@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * DISCLAIMER
+ * Do not edit or add to this file if you wish to upgrade the modules
+ * in the Darkstar Magento 2 Suite to newer versions in the future.
+ *
+ * @category  Iods
+ * @package   Iods_Core
+ * @version   1.1.1
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright (c) 2020, Rye Miller (http://ryemiller.io)
+ * @license   MIT (https://en.wikipedia.org/wiki/MIT_License)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="iods" translate="label" sortOrder="100002">
+            <label>Darkstar</label>
+        </tab>
+
+        <section id="core" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General</label>
+            <tab>iods</tab>
+            <resource>Iods_Core::core_settings</resource>
+            <include path="Iods_Core::system/core_general.xml" />
+        </section>
+    </system>
+</config>
