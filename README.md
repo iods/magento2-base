@@ -1,4 +1,4 @@
-Core Module for Magento 2 
+Core Module for Magento 2
 =========================
 
 The core/base package for my Magento 2 module development.
@@ -14,14 +14,14 @@ Facts
 Description
 -----------
 
-A more advanced boilerplate for core modules. Includes various services and 
+A more advanced boilerplate for core modules. Includes various services and
 tools needed in other modules of the Iods M2 Suite.
 
 
 Requirements
 ------------
 
- * [Git](http://git-scm.com) 
+ * [Git](http://git-scm.com)
  * [PHP v7.0+](http://php.net)
  * [Magento CE 2.2+](http://magento.com)
  * [Composer](http://getcomposer.org)
