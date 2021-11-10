@@ -3,4 +3,4 @@
 
 # ---------  Additional .ignores  ---------- #
 auth.json
-/vendor
+/.vendors/
