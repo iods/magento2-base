@@ -10,11 +10,10 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <module name="Iods_Core" setup_version="0.0.1">
-        <sequence>
-            <module name="Magento_Store" />
-        </sequence>
-    </module>
+    <type name="Magento\TwoFactorAuth\Model\TfaSession">
+        <plugin name="bypassTwoFactorAuth"
+                type="Iods\Core\Plugin\BypassTwoFactorAuth" />
+    </type>
 </config>

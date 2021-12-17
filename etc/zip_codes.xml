@@ -10,11 +10,12 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Directory:etc/zip_codes.xsd">
 
-    <module name="Iods_Core" setup_version="0.0.1">
-        <sequence>
-            <module name="Magento_Store" />
-        </sequence>
-    </module>
+    <zip countryCode="BR">
+        <codes>
+            <code id="pattern_1" active="true" example="12345-678">^[0-9]{5}\-[0-9]{3}$</code>
+            <code id="pattern_2" active="true" example="12345678">^[0-9]{8}$</code>
+        </codes>
+    </zip>
 </config>

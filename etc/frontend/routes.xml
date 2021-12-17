@@ -10,11 +10,11 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
 
-    <module name="Iods_Core" setup_version="0.0.1">
-        <sequence>
-            <module name="Magento_Store" />
-        </sequence>
-    </module>
+    <router id="standard">
+        <route id="test" frontName="test">
+            <module name="Iods_Core" />
+        </route>
+    </router>
 </config>
