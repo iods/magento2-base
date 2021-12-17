@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Core module for extending and testing functionality across Magento 2
+ *
+ * @package   Iods_Core
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
+ * @license   See LICENSE for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <event name="layout_load_before">
+        <observer name="iods_add_body_class" instance="Iods\Core\Observer\AddBodyClass" />
+    </event>
+</config>
