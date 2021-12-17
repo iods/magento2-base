@@ -13,12 +13,20 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
 
     <system>
-        <tab id="iods" translate="label" sortOrder="10">
-            <label>Iods Development</label>
+
+        <!--
+        /**
+         * Notes:
+         */
+        -->
+        <tab id="iods" translate="label" class="iods-tab" sortOrder="10">
+            <label>DRKSTR</label>
         </tab>
 
         <!--
-            Notes:
+        /**
+         * Notes:
+         */
         -->
         <section id="twofactorauth">
             <group id="general">

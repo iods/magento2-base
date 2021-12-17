@@ -13,8 +13,19 @@ namespace Iods\Core\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 
+/**
+ * Class Data
+ * @package Iods\Core\Helper
+ */
 class Data extends AbstractHelper
 {
+    private $_utcConverter;
+
+    private $_timezone;
+
+
+
+
     public function getConfigValue($configField, $store = null)
     {
         return $this->scopeConfig->getValue(
