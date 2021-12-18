@@ -15,7 +15,13 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin" title="Admin">
-                <resource id="Iods_Core::menu" title="Iods::Developer" />
+
+                <resource id="Iods_Core::iods" title="Iods Developer" sortOrder="50">
+                    <resource id="Iods_Core::core" title="Core" sortOrder="10">
+                        <resource id="Iods_Core::config" title="Configuration" sortOrder="10" />
+                        <resource id="Iods_Core::info" title="Information" sortOrder="100" />
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>
