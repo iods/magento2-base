@@ -14,8 +14,9 @@ Facts
 Description
 -----------
 
-A more advanced boilerplate for core modules. Includes various services and
-tools needed in other modules of the Iods M2 Suite.
+ * Checks indexes w/ cron and reindexes any locked/out-of-date tables
+ * cron cleans logs on server and in db
+ * 
 
 
 Requirements

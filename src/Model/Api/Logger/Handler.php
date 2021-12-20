@@ -9,17 +9,5 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Block\Adminhtml\System\Config\Module;
+namespace Iods\Core\Model\Api\Logger;
 
-use Magento\Config\Block\System\Config\Form\Field;
-
-class Version extends Field
-{
-    // template path
-    protected string $_template = 'Iods_Core::system/config/module_version.phtml';
-
-    // config for iods
-    protected $_config;
-
-
-}

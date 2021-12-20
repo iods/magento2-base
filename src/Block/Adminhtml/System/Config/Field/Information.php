@@ -9,23 +9,20 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Block\Adminhtml\System\Config\Module;
+namespace Iods\Core\Block\Adminhtml\System\Config\Field;
 
-use Iods\Core\Helper\Module;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class Vendor extends Field
+class Information extends Field
 {
-    private Module $_module;
+    protected string $_template = 'Iods_Core::system/config/field/information.phtml';
 
     public function __construct(
         Context $context,
-        Module $module,
-        array $data = []
+        array   $data = []
     ) {
-        $this->_module = $module;
         parent::__construct(
             $context,
             $data
@@ -34,12 +31,6 @@ class Vendor extends Field
 
     public function render(AbstractElement $element): string
     {
-        $element->unsetData();
-        return parent::render($element);
-    }
-
-    protected function _getElementHtml(AbstractElement $element): string
-    {
-        return $this->_module->getModuleVersion();
+        return $this->toHtml();
     }
 }

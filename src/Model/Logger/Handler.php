@@ -9,17 +9,13 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Block\Adminhtml\System\Config\Module;
+namespace Iods\Core\Model\Logger;
 
-use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Logger\Handler\Base;
+use Monolog\Logger;
 
-class Version extends Field
+class Handler extends Base
 {
-    // template path
-    protected string $_template = 'Iods_Core::system/config/module_version.phtml';
-
-    // config for iods
-    protected $_config;
-
-
+    // logging level for the module
+    protected int $loggerType = Logger::INFO;
 }
