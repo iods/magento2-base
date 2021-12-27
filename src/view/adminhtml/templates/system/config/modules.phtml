@@ -10,6 +10,7 @@
 <div class="iods-modules">
     <table>
         <tr>
+            <?= /** @var Magento\Framework\Escaper $escaper */ ?>
             <th><?= $escaper->escapeHtml(__('Module Name')) ?></th>
             <th><?= $escaper->escapeHtml(__('Module Version')) ?></th>
             <th><?= $escaper->escapeHtml(__('Is Active')) ?></th>

@@ -10,11 +10,13 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
 
-    <router id="standard">
-        <route id="iods_test" frontName="test">
-            <module name="Iods_Core" />
-        </route>
-    </router>
+    <group id="default">
+        <job instance="Iods\Core\Cron\TheCoreJob"
+             method="execute"
+             name="iods_cron_thecorejob">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+    </group>
 </config>

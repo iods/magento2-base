@@ -33,11 +33,6 @@
                             <cron_expr>*/2 * * * *</cron_expr>
                         </schedule>
                     </iods_cron_indexes_check>
-                    <iods_cron_logs_clean>
-                        <schedule>
-                            <cron_expr>*/2 * * * *</cron_expr>
-                        </schedule>
-                    </iods_cron_logs_clean>
                 </jobs>
             </iods>
         </crontab>

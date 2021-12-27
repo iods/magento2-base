@@ -17,6 +17,7 @@ namespace Iods\Core\Model;
  * Managing common configuration settings used through Iods modules.
  */
 
+use Iods\Core\Api\ConfigInterface;
 use Magento\Config\Model\ResourceModel\Config as ConfigResource;
 use Magento\Eav\Model\Entity;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -27,7 +28,7 @@ use Magento\Framework\Module\ModuleListInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Config
+class Config implements ConfigInterface
 {
     /*
      * Do all modules get this?
@@ -88,17 +89,113 @@ class Config
         $this->_writer = $writer;
     }
 
+    public function isEnabled(int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): bool
+    {
+        return (bool) $this->getConfig('iods_core', $scopeId, $scope);
+    }
 
-    public function getConfig(string $key, int $id = null, string $scope = ScopeInterface::SCOPE_STORE)
+    public function getConfig(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): ?string
     {
         $config = '';
 
         if (isset($this->_config[$key]['path'])) {
-            $path = $this->_config[$key]['path'];
-            if ($id === null) {
-                ///
+            $configPath = $this->_config[$key]['path'];
+            if ($scopeId === null) {
+                $scopeId = $this->_storeManager->getStore()->getId();
+            }
+            if (isset($this->_config[$key]['read_from_db'])) {
+                $config = $this->getConfigFromDatabase($configPath, $scopeId, $scope);
+            } else {
+                $config = $this->_scopeConfig->getValue($configPath, $scopeId, $scope);
+            }
+            if (isset($this->_config[$key]['encrypted']) && $this->_config[$key]['encrypted'] === true && $config) {
+                $config = $this->_encryptor->decrypt($config);
             }
         }
+
+        return $config;
     }
 
+    public function getConfigFromDatabase(string $path, int $id = null, string $scope = ScopeInterface::SCOPE_STORES): string
+    {
+        if ($scope == ScopeInterface::SCOPE_STORE) {
+            $scope = ScopeInterface::SCOPE_STORES;
+        }
+
+        $conn = $this->_configResource->getConnection();
+        if (!$conn) {
+            return '';
+        }
+
+        $select = $conn->select()->from(
+            $this->_configResource->getMainTable(),
+            ['value']
+        )->where(
+            'path = ?',
+            $path
+        )->where(
+            'scope = ?',
+            $scope
+        )->where(
+            'scope_id = ?',
+            $id
+        );
+        return $conn->fetchOne($select);
+    }
+
+    public function getConfigPath(string $key)
+    {
+        return $this->_config[$key]['path'];
+    }
+
+    public function getEavRowIdFieldName(): ?string
+    {
+        return $this->_entity->setType('catalog_product')->getLinkField();
+    }
+
+    public function getRowIdAvailability(): bool
+    {
+        return $this->getEavRowIdFieldName() == 'row_id';
+    }
+
+    public function getModuleVersion()
+    {
+        $module = $this->_moduleList->getOne(self::MODULE_NAME);
+        return $module ? $module ['setup_version'] : null;
+    }
+
+    public function getUpdateSqlLimit(): int
+    {
+        return self::SQL_UPDATE_LIMIT;
+    }
+
+    public function delete(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void
+    {
+        $configPath = $this->_config[$key]['path'];
+        $scope = $scope ?: ScopeInterface::SCOPE_STORES;
+        $scopeId = $scopeId === null ? $this->_storeManager->getStore()->getId() : $scopeId;
+
+        $this->_writer->delete($configPath, $scope, $scopeId);
+    }
+
+    public function save(ConfigValue $configValue)
+    {
+        $this->_writer->save(
+            $configValue->getPath(),
+            $configValue->getValue(),
+            $configValue->getScope()->getScopeCode(),
+            $configValue->getScope()->getScopeCode()
+        );
+    }
+
+//    public function save(string $key, string $value, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void
+//    {
+//        $configPath = $this->_config[$key]['path'];
+//        $scope = $scope ?: ScopeInterface::SCOPE_STORES;
+//        $scopeId = $scopeId === null ? $this->_storeManager->getStore()->getId() : $scopeId;
+//        if (isset($this->_config[$key]['encrypted']) && $this->_config[$key]['encrypted'] == true && $value) {
+//            $value = $this->_encryptor->encrypt($value);
+//        }
+//        $this->_writer->save($configPath, $value, $scope, $scopeId);
+//    }
 }
