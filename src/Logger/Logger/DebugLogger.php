@@ -9,14 +9,11 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Logger;
+namespace Iods\Core\Logger\Logger;
 
-use Magento\Framework\Logger\Handler\Base;
 use Monolog\Logger;
 
-class Handler extends Base
+class DebugLogger extends Logger
 {
-    protected int $loggerType = Logger::INFO;
-
-    protected string $fileName = '/var/log/Iods/iods_core.log';
+    // ...
 }

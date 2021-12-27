@@ -13,5 +13,22 @@ namespace Iods\Core\Logger;
 
 class Logger extends \Monolog\Logger
 {
-    protected string $fileName = '/var/log/iods_core.log';
+    // protected string $fileName = '/var/log/iods_core.log';
+    protected Handler $_handler;
+
+    public function __construct(
+        Handler $handler
+    ) {
+        $this->_handler = $handler;
+        parent::__construct(
+            "iods",
+            ["handlers" => $this->_handler]
+        );
+    }
+
+    public function error($message, array $context = array()): bool
+    {
+        // add helper method to send to external system
+        return $this->addRecord(static::CRITICAL, $message, $context);
+    }
 }
