@@ -1,10 +1,24 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ## [Unreleased]
-### Breaking Changes
+
+## [1.1.1] - 2020-10-07
 ### Added
-### Notable Changes
-### Removed
-### Fixed
-### Docs
+- Merge branch 'release/1.1.1'
+
+## [0.1.1] - 2020-01-28
+### Added
+- Addition of project to packagist.
+
+## [0.1] - 2020-01-03
+### Added
+- Initial commit of project.
+
+
+[1.1.1]: https://github.com/iods/magento2-core/releases/tag/1.1.1
+[0.1.1]: https://github.com/iods/magento2-core/releases/tag/0.1.1
+[0.1]: https://github.com/iods/magento2-core/releases/tag/0.1

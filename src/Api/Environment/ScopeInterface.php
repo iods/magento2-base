@@ -9,15 +9,11 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Helper;
+namespace Iods\Core\Api\Environment;
 
-use Magento\Framework\App\Helper\AbstractHelper;
-
-/**
- * Class Feed
- * @package Iods\Core\Helper
- */
-class Feed extends AbstractHelper
+interface ScopeInterface
 {
-    // ...
+    public function getScopeCode(): int;
+
+    public function getScopeType(): string;
 }

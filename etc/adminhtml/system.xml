@@ -11,25 +11,25 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
-
+    <!--
+    /**
+     * Notes: Core module defines tabs.
+     * Describe how NOT to extend modules here.
+     */
+    -->
     <system>
-
-        <!--
-        /**
-         * Notes: DRKSTR or Iods?
-         */
-        -->
         <tab id="iods" translate="label" class="iods-tab" sortOrder="10">
-            <label>DRKSTR Extensions</label>
+            <label>iods Development</label>
         </tab>
         <!--
          /**
-          * Notes:
+          * Notes: General Configurations
+          *     1. Module/Developer/Store Information
           */
         -->
-        <section id="iods_core" translate="label" sortOrder="999" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="iods_general" translate="label" sortOrder="999" showInDefault="1" showInStore="1" showInWebsite="1">
             <class>separator-top</class>
-            <label>Core</label>
+            <label>General Configurations</label>
             <tab>iods</tab>
             <resource>Iods_Core::config</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -59,14 +59,19 @@
                     <label>Configuration</label>
                     <frontend_model>Iods\Core\Block\Adminhtml\System\Config\Form\Field\Link</frontend_model>
                 </field>
+                <field id="versions" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Current Versions</label>
+                    <frontend_model>Iods\Core\Bloc\System\Config\Modules</frontend_model>
+                    <backend_model>Iods\Core\Model\Config\Version</backend_model>
+                </field>
             </group>
         </section>
         <!--
         /**
-         * Notes:
+         * Notes: Enable 2FA
          */
         -->
-        <section id="iods-twofactorauth">
+        <section id="iods_tfa">
             <group id="general">
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" canRestore="1">
                     <label>Enable 2FA</label>

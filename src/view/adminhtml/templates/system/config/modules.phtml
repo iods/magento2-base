@@ -1,0 +1,26 @@
+<style>
+    .iods-modules {
+        padding-left: 50px;
+    }
+
+    .iods-modules {
+        text-align: right;
+    }
+</style>
+<div class="iods-modules">
+    <table>
+        <tr>
+            <?= /** @var Magento\Framework\Escaper $escaper */ ?>
+            <th><?= $escaper->escapeHtml(__('Module Name')) ?></th>
+            <th><?= $escaper->escapeHtml(__('Module Version')) ?></th>
+            <th><?= $escaper->escapeHtml(__('Is Active')) ?></th>
+        </tr>
+        <?php foreach ($block->getModules() as $module): ?>
+            <tr>
+                <td><?= $escaper->escapeHtml($module['name']) ?></td>
+                <td><?= $escaper->escapeHtml($module['version']) ?></td>
+                <td><?= $escaper->escapeHtml((bool)(int)$module['active'] ? __('Yes') : __('No')) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

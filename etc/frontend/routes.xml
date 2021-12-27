@@ -13,7 +13,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
 
     <router id="standard">
-        <route id="test" frontName="test">
+        <route id="iods_test" frontName="test">
             <module name="Iods_Core" />
         </route>
     </router>

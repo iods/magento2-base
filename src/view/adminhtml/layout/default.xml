@@ -13,6 +13,6 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 
     <head>
-        <css src="Iods_Core::css/iods.css"/>
+        <css src="Iods_Core::css/adminhtml.css"/>
     </head>
 </page>

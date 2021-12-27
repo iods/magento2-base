@@ -12,14 +12,29 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
 
+    <!--
+    /*
+     * Notes:
+     *
+     */
+    -->
     <acl>
         <resources>
             <resource id="Magento_Backend::admin" title="Admin">
+                <resource id="Magento_Backend::stores" title="Stores">
+                    <resource id="Magento_Backend::stores_settings" title="Stores Settings">
+                        <resource id="Magento_Config::config" title="Config">
 
-                <resource id="Iods_Core::iods" title="Iods Developer" sortOrder="50">
-                    <resource id="Iods_Core::core" title="Core" sortOrder="10">
-                        <resource id="Iods_Core::config" title="Configuration" sortOrder="10" />
-                        <resource id="Iods_Core::info" title="Information" sortOrder="100" />
+                            <resource id="Iods_Core::iods" title="Iods Developer" sortOrder="50">
+                                <resource id="Iods_Core::core" title="Core" sortOrder="10">
+
+                                    <resource id="Iods_Core::config" title="General Configuration" sortOrder="10" />
+                                    <resource id="Iods_Core::info" title="Information" sortOrder="100" />
+
+                                </resource>
+                            </resource>
+
+                        </resource>
                     </resource>
                 </resource>
             </resource>

@@ -15,8 +15,26 @@
     <default>
         <iods>
             <general>
+                <debug_enabled>0</debug_enabled>
                 <menu>0</menu>
             </general>
+            <env>
+                <iods_api_url>https://api.thedarksociety.cloud/core/v3/stores/{store_id}/</iods_api_url>
+                <iods_api_url_messaging>https://api.thedarksociety.cloud/messaging/v3/stores/{store_id}/</iods_api_url_messaging>
+                <iods_api_v1_url>https://api.thedarksociety.cloud/</iods_api_v1_url>
+                <iods_api_url_access_tokens>access_tokens</iods_api_url_access_tokens>
+            </env>
         </iods>
+        <crontab>
+            <iods>
+                <jobs>
+                    <iods_cron_indexes_check>
+                        <schedule>
+                            <cron_expr>*/2 * * * *</cron_expr>
+                        </schedule>
+                    </iods_cron_indexes_check>
+                </jobs>
+            </iods>
+        </crontab>
     </default>
 </config>

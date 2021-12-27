@@ -12,6 +12,25 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <preference for="Iods\Core\Api\Environment\ConfigValuesProvider"
+                type="Iods\Core\Model\Environment\PhpValues" />
+
+    <!--
+        Notes: All Commands are under this node (commands)
+    -->
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="iods_core_run_sample_command" xsi:type="object">Iods\Core\Console\Command\RunSampleCommand</item>
+                <item name="iods_core_environment_configuration_command" xsi:type="object">Iods\Core\Console\Command\EnvironmentConfigurationCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Iods\Core\Model\Environment\PhpValues">
+        <arguments>
+            <argument name="filePath" xsi:type="string">app/etc/environment_config.php</argument>
+        </arguments>
+    </type>
     <type name="Magento\TwoFactorAuth\Model\TfaSession">
         <plugin name="bypassTwoFactorAuth"
                 type="Iods\Core\Plugin\BypassTwoFactorAuth" />
