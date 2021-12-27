@@ -11,191 +11,153 @@ declare(strict_types=1);
 
 namespace Iods\Core\Model;
 
-/*
- * What are we doing here in this file?
- *
- * Managing common configuration settings used through Iods modules.
- */
-
-use Iods\Core\Api\ConfigInterface;
-use Magento\Config\Model\ResourceModel\Config as ConfigResource;
-use Magento\Eav\Model\Entity;
+use Iods\Core\Api\Config\RepositoryInterface as ConfigRepositoryInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Framework\App\ProductMetadataInterface;
-use Magento\Framework\Encryption\EncryptorInterface;
-use Magento\Framework\Module\ModuleListInterface;
-use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Module\ModuleList;
+use Magento\Framework\UrlInterface;
+use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Store\Model\Website;
 
-class Config implements ConfigInterface
+/**
+ * Repository Class
+ * @package Iods\Core\Model\Config
+ */
+class Config implements ConfigRepositoryInterface
 {
-    /*
-     * Do all modules get this?
-     */
-    const MODULE_NAME = 'Iods_Core';
+    /** @var ModuleList $_moduleList */
+    protected ModuleList $_moduleList;
 
-    /*
-     * What is important about this?
-     */
-    const SQL_UPDATE_LIMIT = 50000;
+    /** @var ProductMetadataInterface $_productMetaData */
+    protected ProductMetadataInterface $_productMetaData;
 
-    protected array $_config = [
-        'api' => ['path' => 'iods/env/iods_api_url'],
-        'api_messaging' => ['path' => 'iods_core/env/iods_api_url_messaging'],
-        'app_key' => ['path' => 'iods/settings/app_key'],
-        'apiV1' => ['path' => 'iods/env/iods_api_v1_url'],
-        'enable_debug' => ['path' => 'iods/settings/enable_debug'],
-        'iods_active' => ['path' => 'iods/settings/active'],
-        'secret' => ['path' => 'iods/settings/secret','encrypted' => true]
-    ];
-
-    protected ConfigResource $_configResource;
-
-    protected EncryptorInterface $_encryptor;
-
-    protected Entity $_entity;
-
-    protected ModuleListInterface $_moduleList;
-
-    protected ProductMetadataInterface $_productMetadata;
-
-    protected ScopeConfigInterface $_scopeConfig;
-
-    // array of int and string?
+    /** @var array $_storeCode */
     protected array $_storeCode = [];
 
+    /** @var ScopeConfigInterface $_scopeConfig */
+    protected ScopeConfigInterface $_scopeConfig;
+
+    /** @var StoreManagerInterface $_storeManager */
     protected StoreManagerInterface $_storeManager;
 
-    protected WriterInterface $_writer;
+    /** @var array|null[] $_allStoreIds */
+    private array $_allStoreIds = [0 => null, 1 => null];
 
     public function __construct(
-        ConfigResource $configResource,
-        EncryptorInterface $encryptor,
-        Entity $entity,
-        ModuleListInterface $moduleList,
         ProductMetadataInterface $productMetadata,
-        ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager,
-        WriterInterface $writer
+        StoreManagerInterface $storeManager
     ) {
-        $this->_configResource = $configResource; // what and why?
-        $this->_encryptor = $encryptor; // what and why?
-        $this->_entity = $entity;
-        $this->_moduleList = $moduleList;
-        $this->_productMetadata = $productMetadata;
-        $this->_scopeConfig = $scopeConfig;
+        $this->_productMetaData = $productMetadata;
         $this->_storeManager = $storeManager;
-        $this->_writer = $writer;
     }
 
-    public function isEnabled(int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): bool
+    /**
+     * @inheritDoc
+     */
+    public function getAllStoreIds(bool $withDefault = false, bool $active = true): array
     {
-        return (bool) $this->getConfig('iods_core', $scopeId, $scope);
-    }
+        $cacheKey = ($withDefault) ? 1 : 0;
 
-    public function getConfig(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): ?string
-    {
-        $config = '';
+        if ($this->_allStoreIds[$cacheKey] === null) {
+            $this->_allStoreIds[$cacheKey] = [];
 
-        if (isset($this->_config[$key]['path'])) {
-            $configPath = $this->_config[$key]['path'];
-            if ($scopeId === null) {
-                $scopeId = $this->_storeManager->getStore()->getId();
-            }
-            if (isset($this->_config[$key]['read_from_db'])) {
-                $config = $this->getConfigFromDatabase($configPath, $scopeId, $scope);
-            } else {
-                $config = $this->_scopeConfig->getValue($configPath, $scopeId, $scope);
-            }
-            if (isset($this->_config[$key]['encrypted']) && $this->_config[$key]['encrypted'] === true && $config) {
-                $config = $this->_encryptor->decrypt($config);
+            foreach ($this->_storeManager->getStores($withDefault) as $store) {
+                /** @var Store $store */
+                if ($active && !$store->isActive()) {
+                    continue;
+                }
+                $this->_allStoreIds[$cacheKey][] = $store->getId();
             }
         }
-
-        return $config;
+        return $this->_allStoreIds[$cacheKey];
     }
 
-    public function getConfigFromDatabase(string $path, int $id = null, string $scope = ScopeInterface::SCOPE_STORES): string
+    /**
+     * @inheritDoc
+     */
+    public function getBaseUrl(string $type = UrlInterface::URL_TYPE_WEB): string
     {
-        if ($scope == ScopeInterface::SCOPE_STORE) {
-            $scope = ScopeInterface::SCOPE_STORES;
+        return $this->_storeManager->getStore()->getBaseUrl($type);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCurrentCurrency(): string
+    {
+        return $this->_storeManager->getStore()->getCurrentCurrencyCode();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultStoreId(int $websiteId): int
+    {
+        $storeId = 0;
+
+        /** @var Website $website */
+        $website = $this->_storeManager->getWebsite($websiteId);
+
+        if ($website instanceof Website) {
+            $storeId = $website->getDefaultStore()->getId();
         }
+        return $storeId;
+    }
 
-        $conn = $this->_configResource->getConnection();
-        if (!$conn) {
-            return '';
+    /**
+     * @inheritDoc
+     */
+    public function getDefaultWebsiteId(): int
+    {
+        $websiteId = 0;
+        $storeView = $this->_storeManager->getDefaultStoreView();
+        if ($storeView) {
+            $websiteId = $storeView->getWebsiteId();
         }
-
-        $select = $conn->select()->from(
-            $this->_configResource->getMainTable(),
-            ['value']
-        )->where(
-            'path = ?',
-            $path
-        )->where(
-            'scope = ?',
-            $scope
-        )->where(
-            'scope_id = ?',
-            $id
-        );
-        return $conn->fetchOne($select);
+        return $websiteId;
     }
 
-    public function getConfigPath(string $key)
+    /**
+     * @inheritDoc
+     */
+    public function getMagentoEdition(): string
     {
-        return $this->_config[$key]['path'];
+        return $this->_productMetaData->getEdition();
     }
 
-    public function getEavRowIdFieldName(): ?string
+    /**
+     * @inheritDoc
+     */
+    public function getMagentoVersion(): string
     {
-        return $this->_entity->setType('catalog_product')->getLinkField();
+        return $this->_productMetaData->getVersion();
     }
 
-    public function getRowIdAvailability(): bool
+    /**
+     * @inheritDoc
+     */
+    public function getStoreId(): int
     {
-        return $this->getEavRowIdFieldName() == 'row_id';
+        return $this->_storeManager->getStore()->getId();
     }
 
-    public function getModuleVersion()
+    /**
+     * @inheritDoc
+     */
+    public function getStoreName(int $storeId): string
     {
-        $module = $this->_moduleList->getOne(self::MODULE_NAME);
-        return $module ? $module ['setup_version'] : null;
+        if (!array_key_exists($storeId, $this->_storeCode)) {
+            $this->_storeCode[$storeId] = $this->_storeManager->getStore($storeId)->getName();
+        }
+        return $this->_storeCode[$storeId];
     }
 
-    public function getUpdateSqlLimit(): int
+    /**
+     * @inheritDoc
+     */
+    public function getWebsiteId(): int
     {
-        return self::SQL_UPDATE_LIMIT;
+        return $this->_storeManager->getStore()->getWebsiteId();
     }
-
-    public function delete(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void
-    {
-        $configPath = $this->_config[$key]['path'];
-        $scope = $scope ?: ScopeInterface::SCOPE_STORES;
-        $scopeId = $scopeId === null ? $this->_storeManager->getStore()->getId() : $scopeId;
-
-        $this->_writer->delete($configPath, $scope, $scopeId);
-    }
-
-    public function save(ConfigValue $configValue)
-    {
-        $this->_writer->save(
-            $configValue->getPath(),
-            $configValue->getValue(),
-            $configValue->getScope()->getScopeCode(),
-            $configValue->getScope()->getScopeCode()
-        );
-    }
-
-//    public function save(string $key, string $value, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void
-//    {
-//        $configPath = $this->_config[$key]['path'];
-//        $scope = $scope ?: ScopeInterface::SCOPE_STORES;
-//        $scopeId = $scopeId === null ? $this->_storeManager->getStore()->getId() : $scopeId;
-//        if (isset($this->_config[$key]['encrypted']) && $this->_config[$key]['encrypted'] == true && $value) {
-//            $value = $this->_encryptor->encrypt($value);
-//        }
-//        $this->_writer->save($configPath, $value, $scope, $scopeId);
-//    }
 }
