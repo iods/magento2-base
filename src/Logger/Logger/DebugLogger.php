@@ -9,19 +9,11 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Api;
+namespace Iods\Core\Logger\Logger;
 
-use Iods\Core\Model\Environment\Scope;
+use Monolog\Logger;
 
-interface ConfigValueInterface
+class DebugLogger extends Logger
 {
-    public function isNull(): bool;
-
-    public function getPath(): string;
-
-    public function getScope();
-
-    public function withScope(Scope $scope);
-
-    public function getValue();
+    // ...
 }

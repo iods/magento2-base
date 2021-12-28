@@ -9,11 +9,11 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Api\Environment;
+namespace Iods\Core\Logger\Logger;
 
-interface ScopeInterface
+use Monolog\Logger;
+
+class ErrorLogger extends Logger
 {
-    public function getScopeCode(): int;
-
-    public function getScopeType(): string;
+    // ...
 }

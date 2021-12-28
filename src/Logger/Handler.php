@@ -18,5 +18,5 @@ class Handler extends Base
 {
     protected int $loggerType = Logger::INFO;
 
-    protected string $fileName = '/var/log/iods_core.log';
+    protected string $fileName = '/var/log/Iods/iods_core.log';
 }
