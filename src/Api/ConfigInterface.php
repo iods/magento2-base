@@ -9,7 +9,7 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Api\Config;
+namespace Iods\Core\Api;
 
 use Exception;
 use Iods\Core\Model\Config;
@@ -23,9 +23,17 @@ use Magento\Store\Model\ScopeInterface;
  * Config Repository Interface
  * @package Iods\Core\Api\Config
  */
-interface RepositoryInterface
+interface ConfigInterface
 {
+    public const ENVIRONMENT_DEVELOPMENT  = 'development';
+    public const ENVIRONMENT_LOCAL        = 'local';
+    public const ENVIRONMENT_PRODUCTION   = 'production';
+    public const ENVIRONMENT_STAGING      = 'staging';
+
     public const MODULE_NAME              = 'Iods_Core';
+    public const MODULE_SQL_UPDATE_LIMIT  = 50000;
+
+    public const XML_PATH_API_URL         = 'api_url';
     public const XML_PATH_API_MODE        = 'mode';
     public const XML_PATH_DEBUG           = 'iods/general/debug';
     public const XML_PATH_DEFAULT_PATTERN = 'iods/general/%s';
@@ -39,7 +47,7 @@ interface RepositoryInterface
      * Creates a config value.
      * @return mixed
      */
-    public function create();
+    // public function create();
 
     /**
      * Deletes a config value.
@@ -70,7 +78,7 @@ interface RepositoryInterface
      * @return string
      * @throws Exception
      */
-    public function getApiKey($storeId = null): string;
+    // public function getApiKey($storeId = null): string;
 
     /**
      * @param string $type
@@ -109,14 +117,14 @@ interface RepositoryInterface
      * @param string $environment
      * @return mixed
      */
-    public function getConfigValuesByEnvironment(string $environment);
+    // public function getConfigValuesByEnvironment(string $environment);
 
     /**
      * @param $path
      * @param null $scope
      * @return Config
      */
-    public function getConfigValueByPath($path, $scope = null): Config;
+    // public function getConfigValueByPath($path, $scope = null): Config;
 
     /**
      * @return string
@@ -152,28 +160,16 @@ interface RepositoryInterface
 
     /**
      * Returns the current prod version of the module.
-     * @return string
+     * @return string|null
      */
-    public function getModuleVersion(): string;
-
-    /**
-     * Returns the scope code.
-     * @return int
-     */
-    public function getScopeCode(): int;
-
-    /**
-     * Returns the scope type.
-     * @return string
-     */
-    public function getScopeType(): string;
+    public function getModuleVersion(): ?string;
 
     /**
      * Returns the current or specified store scope.
      * @param int|null $storeId
      * @return StoreInterface
      */
-    public function getStore(int $storeId = null): StoreInterface;
+    // public function getStore(int $storeId = null): StoreInterface;
 
     /**
      * Returns the current store id.
@@ -196,12 +192,6 @@ interface RepositoryInterface
     public function getUpdateSqlLimit(): int;
 
     /**
-     * Returns configuration values as the Config Values provider.
-     * @return mixed
-     */
-    public function getValues();
-
-    /**
      * Returns the active website ID.
      * @return int
      * @throws NoSuchEntityException
@@ -212,7 +202,7 @@ interface RepositoryInterface
      * Returns true if debug logging is enabled.
      * @return bool
      */
-    public function isDebugLog(): bool;
+    // public function isDebugLog(): bool;
 
     /**
      * Returns true or false whether the module is enabled.
@@ -225,31 +215,12 @@ interface RepositoryInterface
     /**
      * @return bool
      */
-    public function isEmpty(): bool;
+    // public function isEmpty(): bool;
 
     /**
      * Returns what API mode the module is in.
      * @param int|null $storeId
      * @return bool
      */
-    public function isLiveMode(int $storeId = null): bool;
-
-    /**
-     * @return bool
-     */
-    public function isNull(): bool;
-
-    /**
-     * @param Config $configValue
-     * @return $this
-     */
-    public function withConfigValue(Config $configValue): self;
-
-    /**
-     * Returns list of config values with their environment.
-     * @param $configValues
-     * @param string $environment
-     * @return mixed
-     */
-    public function withConfigValuesForEnvironment($configValues, string $environment);
+    // public function isLiveMode(int $storeId = null): bool;
 }
