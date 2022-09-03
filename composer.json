@@ -1,8 +1,7 @@
 {
-  "name": "iods/module-core",
-  "description": "Core module for extending and testing functionality across Magento 2.",
+  "name": "iods/module-base",
+  "description": "Base module container for extending and testing general functionality across Magento 2.",
   "type": "magento2-module",
-  "version": "1.1.1",
   "license": [
     "MIT"
   ],
@@ -10,8 +9,7 @@
     {
       "name": "Rye Miller",
       "email": "rye@drkstr.dev",
-      "homepage": "https://ryemiller.io",
-      "role": "Developer"
+      "homepage": "https://ryemiller.io"
     }
   ],
   "minimum-stability": "dev",
@@ -22,10 +20,10 @@
     }
   },
   "require": {
-    "php": ">=7.4",
     "magento/framework": ">=103.0.3-p1",
     "magento/module-config": ">=101.2.3",
     "magento/module-backend": ">=102.0.3",
+    "php": ">=7.4",
     "symfony/console": "*"
   },
   "require-dev": {
@@ -38,7 +36,7 @@
   "autoload": {
     "files": ["registration.php"],
     "psr-4": {
-      "Iods\\Core\\": "src"
+      "Iods\\Base\\": "src"
     }
   },
   "autoload-dev": {
@@ -53,5 +51,6 @@
     ],
     "phpstan": "phpstan analyse",
     "phpunit": "phpunit --no-coverage"
-  }
+  },
+  "version": "1.1.1"
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Iods Magento coding standard">
+<ruleset name="ioDS Magento coding standard">
     <config name="installed_paths" value="vendor/iods/coding-standards,vendor/magento-ecg/coding-standard"/>
 
     <arg value="p"/>

@@ -1,30 +1,28 @@
-Core Module for Magento 2
+Base Module for Magento 2
 =========================
 
-The core/base package for my Magento 2 module development.
+Base module container for extending and testing general functionality across Magento 2.
 
 
 Facts
 -----
 
  * Version: 1.1.1 (Development)
+ * [Composer Package](https://packagist.org/packages/iods/module-core)
  * [Repository on Github](https://github.com/iods/magento2-core)
 
 
 Description
 -----------
 
- * Checks indexes w/ cron and reindexes any locked/out-of-date tables
- * cron cleans logs on server and in db
- * 
 
 
 Requirements
 ------------
 
  * [Git](http://git-scm.com)
- * [PHP v7.0+](http://php.net)
- * [Magento CE 2.2+](http://magento.com)
+ * [PHP v7.4+](http://php.net)
+ * [Magento CE 2.3+](http://magento.com)
  * [Composer](http://getcomposer.org)
 
 
@@ -40,7 +38,7 @@ Developer
 Support
 -------
 
-If you have any issues with this module, open an issue on [Github](https://github.com/iods/magento2-core/issues)
+If you have any issues with this module, open an issue on [Github](https://github.com/iods/magento2-base/issues)
 
 
 Versioning
@@ -53,10 +51,10 @@ maintained under [the Semantic Versioning guidelines](http://semver.org/).
 License
 -------
 
-This project/code is released under [the MIT license](https://github.com/iods/magento2-bones/LICENSE).
+This project/code is released under [the MIT license](https://github.com/iods/magento2-base/LICENSE).
 
 
 Copyright
 ---------
 
-(c) 2020 Rye Miller
+(c) 2022 Rye Miller
