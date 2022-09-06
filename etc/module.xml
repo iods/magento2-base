@@ -1,21 +1,31 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Core module for extending and testing functionality across Magento 2
+ * Base module container for extending and testing general functionality across Magento 2.
  *
- * @package   Iods_Core
+ * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-
-    <module name="Iods_Core" setup_version="0.0.1">
+    <!--
+    /*
+     * Notes: @TODO
+     */
+    -->
+    <module name="Iods_Base" setup_version="0.1.1" schema_version="0.1.1" data_version="0.1.1">
         <sequence>
+            <module name="Magento_Analytics" />
             <module name="Magento_Backend" />
+            <module name="Magento_Catalog" />
+            <module name="Magento_Config" />
+            <module name="Magento_Directory" />
+            <module name="Magento_Indexer" />
             <module name="Magento_Store" />
+            <module name="Magento_Theme" />
         </sequence>
     </module>
 </config>

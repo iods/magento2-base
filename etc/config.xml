@@ -1,40 +1,44 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Core module for extending and testing functionality across Magento 2
+ * Base module container for extending and testing general functionality across Magento 2.
  *
- * @package   Iods_Core
+ * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-
+    <!--
+    /*
+     * Notes: @TODO
+     */
+    -->
     <default>
-        <iods>
-            <general>
-                <debug_enabled>0</debug_enabled>
-                <menu>0</menu>
-            </general>
-            <env>
-                <iods_api_url>https://api.thedarksociety.cloud/core/v3/stores/{store_id}/</iods_api_url>
-                <iods_api_url_messaging>https://api.thedarksociety.cloud/messaging/v3/stores/{store_id}/</iods_api_url_messaging>
-                <iods_api_v1_url>https://api.thedarksociety.cloud/</iods_api_v1_url>
-                <iods_api_url_access_tokens>access_tokens</iods_api_url_access_tokens>
-            </env>
-        </iods>
-        <crontab>
-            <iods>
-                <jobs>
-                    <iods_cron_indexes_check>
-                        <schedule>
-                            <cron_expr>*/2 * * * *</cron_expr>
-                        </schedule>
-                    </iods_cron_indexes_check>
-                </jobs>
-            </iods>
-        </crontab>
+        <base>
+            <base_general>
+                <general_enable_self>1</general_enable_self>
+                <general_enable_developer>0</general_enable_developer>
+            </base_general>
+            <base_logging>
+                <logging_is_production>0</logging_is_production>
+                <logging_cleanup_period>30</logging_cleanup_period>
+            </base_logging>
+            <base_support>
+                <support_enabled>0</support_enabled>
+                <support_email>rye@drkstr.dev</support_email>
+                <support_whitelist_ip><![CDATA[
+127.0.0.1
+8.8.8.8
+192.168.0.1
+10.10.10.1
+                ]]></support_whitelist_ip>
+                <suppport_extended>0</suppport_extended>
+                <support_key>1A2B3C4D5E6F</support_key>
+                <support_statistics>0</support_statistics>
+            </base_support>
+        </base>
     </default>
 </config>

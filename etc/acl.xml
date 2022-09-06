@@ -1,21 +1,19 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Core module for extending and testing functionality across Magento 2
+ * Base module container for extending and testing general functionality across Magento 2.
  *
- * @package   Iods_Core
+ * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
-
     <!--
     /*
-     * Notes:
-     *
+     * Notes: @TODO
      */
     -->
     <acl>
@@ -25,13 +23,8 @@
                     <resource id="Magento_Backend::stores_settings" title="Stores Settings">
                         <resource id="Magento_Config::config" title="Config">
 
-                            <resource id="Iods_Core::iods" title="Iods Developer" sortOrder="50">
-                                <resource id="Iods_Core::core" title="Core" sortOrder="10">
-
-                                    <resource id="Iods_Core::config" title="General Configuration" sortOrder="10" />
-                                    <resource id="Iods_Core::info" title="Information" sortOrder="100" />
-
-                                </resource>
+                            <resource id="Iods_Base::settings" title="iods Section" sortOrder="50">
+                                <resource id="Iods_Base::general" title="Base Settings Section" sortOrder="10" />
                             </resource>
 
                         </resource>

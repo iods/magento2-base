@@ -1,34 +1,19 @@
 <?php
 /**
- * Core module for extending and testing functionality across Magento 2
+ * Base module container for extending and testing general functionality across Magento 2.
  *
- * @package   Iods_Core
+ * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Logger;
+namespace Iods\Base\Logger;
 
-class Logger extends \Monolog\Logger
+use Monolog\Logger as MonologLogger;
+
+class Logger extends MonologLogger
 {
-    // protected string $fileName = '/var/log/iods_core.log';
-    protected Handler $_handler;
-
-    public function __construct(
-        Handler $handler
-    ) {
-        $this->_handler = $handler;
-        parent::__construct(
-            "iods",
-            ["handlers" => $this->_handler]
-        );
-    }
-
-    public function error($message, array $context = array()): bool
-    {
-        // add helper method to send to external system
-        return $this->addRecord(static::CRITICAL, $message, $context);
-    }
+    // ..
 }

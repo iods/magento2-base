@@ -1,18 +1,16 @@
 <?php
 /**
- * Core module for extending and testing functionality across Magento 2
+ * Base module container for extending and testing general functionality across Magento 2.
  *
- * @package   Iods_Core
+ * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Api;
+namespace Iods\Base\Api\Data;
 
-use Exception;
-use Iods\Core\Model\Config;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
@@ -20,18 +18,19 @@ use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Config Repository Interface
- * @package Iods\Core\Api\Config
+ * Interface ConfigInterface
+ * @package Iods\Base\Api
  */
 interface ConfigInterface
 {
-    public const ENVIRONMENT_DEVELOPMENT  = 'development';
-    public const ENVIRONMENT_LOCAL        = 'local';
-    public const ENVIRONMENT_PRODUCTION   = 'production';
-    public const ENVIRONMENT_STAGING      = 'staging';
+    public const ENVIRONMENT_DEVELOPMENT = 'development';
+    public const ENVIRONMENT_LOCAL       = 'local';
+    public const ENVIRONMENT_PRODUCTION  = 'production';
+    public const ENVIRONMENT_STAGING     = 'staging';
 
-    public const MODULE_NAME              = 'Iods_Core';
-    public const MODULE_SQL_UPDATE_LIMIT  = 50000;
+    public const MODULE_CONFIG_PATH      = 'iods_base';
+    public const MODULE_NAME             = 'Iods_Base';
+    public const MODULE_SQL_UPDATE_LIMIT = 50000;
 
     public const XML_PATH_API_URL         = 'api_url';
     public const XML_PATH_API_MODE        = 'mode';
@@ -44,6 +43,27 @@ interface ConfigInterface
     public const XML_PATH_TEST_API_KEY    = 'test_api_key';
 
     /**
+     * @return string
+     */
+    public function getApiUrl(): string;
+
+    /**
+     * @return string
+     */
+    public function getApiToken(): string;
+
+    /**
+     * @return string
+     */
+    public function getNotificationUrl(): string;
+
+    /**
+     * @return string
+     */
+    public function getPaymentLimits(): string;
+}
+
+    /**
      * Creates a config value.
      * @return mixed
      */
@@ -54,19 +74,12 @@ interface ConfigInterface
      * @param string $key
      * @param int|null $scopeId
      * @param string $scope
+     * @return void
      */
     public function delete(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void;
 
     /**
-     * Saves a config value.
-     * @param string $key
-     * @param string $value
-     * @param int|null $scopeId
-     * @param string $scope
-     */
-    public function save(string $key, string $value, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void;
-
-    /**
+     * Returns the store ids in an array. (with or without the default)
      * @param bool $withDefault
      * @param bool $active
      * @return array
@@ -74,21 +87,21 @@ interface ConfigInterface
     public function getAllStoreIds(bool $withDefault = false, bool $active = true): array;
 
     /**
-     * @param null $storeId
+     * Returns the API key for a specific store.
+     * @param int|null $storeId
      * @return string
-     * @throws Exception
      */
-    // public function getApiKey($storeId = null): string;
+    public function getApiKey(int $storeId = null): string;
 
     /**
+     * Returns the sites base url.
      * @param string $type
      * @return string
-     * @throws NoSuchEntityException
      */
     public function getBaseUrl(string $type = UrlInterface::URL_TYPE_WEB): string;
 
     /**
-     * Returns a config value based on specific parameters.
+     * Returns the configuration value based on the provided params.
      * @param string $key
      * @param int|null $scopeId
      * @param string $scope
@@ -97,36 +110,30 @@ interface ConfigInterface
     public function getConfig(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): ?string;
 
     /**
-     * Returns a config value from the database.
-     * @param string $path
-     * @param int|null $id
+     * Returns the configuration value based on the provided params from the database.
+     * @param string $key
+     * @param int|null $scopeId
      * @param string $scope
      * @return string
      */
-    public function getConfigFromDatabase(string $path, int $id = null, string $scope = ScopeInterface::SCOPE_STORES): string;
+    public function getConfigFromDatabase(string $key, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): string;
 
     /**
-     * Returns the path for the config key.
-     * @param string $key
-     * @return mixed
-     */
-    public function getConfigPath(string $key);
-
-    /**
-     * Returns a value set based on the environment given.
+     * Returns the config set based on the environment provided.
      * @param string $environment
      * @return mixed
      */
-    // public function getConfigValuesByEnvironment(string $environment);
+    public function getConfigsFromEnvironment(string $environment): mixed;
 
     /**
-     * @param $path
-     * @param null $scope
-     * @return Config
+     * Returns the path for the config values key.
+     * @param string $key
+     * @return mixed
      */
-    // public function getConfigValueByPath($path, $scope = null): Config;
+    public function getConfigPath(string $key): mixed;
 
     /**
+     * Returns the current currency code used.
      * @return string
      * @throws NoSuchEntityException
      */
@@ -147,19 +154,30 @@ interface ConfigInterface
     public function getDefaultWebsiteId(): int;
 
     /**
-     * Returns the current edition (EE or CE) Magento is running on.
+     * Returns the current edition Magento is running on.
      * @return string
      */
     public function getMagentoEdition(): string;
 
     /**
-     * Returns the current version running on Magento.
+     * @return string
+     */
+    public function getMagentoInstallPath(): string;
+
+    /**
+     * Returns the application deploy mode.
+     * @return string
+     */
+    public function getMagentoMode(): string;
+
+    /**
+     * Returns the current version Magento is running on.
      * @return string
      */
     public function getMagentoVersion(): string;
 
     /**
-     * Returns the current prod version of the module.
+     * Returns the current stable version of the module.
      * @return string|null
      */
     public function getModuleVersion(): ?string;
@@ -187,6 +205,7 @@ interface ConfigInterface
     public function getStoreName(int $storeId): string;
 
     /**
+     * Returns the limit for
      * @return int
      */
     public function getUpdateSqlLimit(): int;
@@ -223,4 +242,14 @@ interface ConfigInterface
      * @return bool
      */
     // public function isLiveMode(int $storeId = null): bool;
+
+    /**
+     * Saves a config value.
+     * @param string $key
+     * @param string $value
+     * @param int|null $scopeId
+     * @param string $scope
+     * @return void
+     */
+    public function save(string $key, string $value, int $scopeId = null, string $scope = ScopeInterface::SCOPE_STORE): void;
 }
