@@ -15,9 +15,15 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\ObjectManagerInterface;
 use Throwable;
 
+/**
+ * Class BaseHelper
+ * @package Iods\Base\Helper
+ */
 class BaseHelper extends AbstractHelper
 {
-    protected ObjectManagerInterface $_objectManager;
+
+    /** @var ObjectManagerInterface */
+    protected ObjectManagerInterface $_object_manager;
 
     public function __construct(
         Context $context,

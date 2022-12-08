@@ -29,8 +29,8 @@ class Log extends AbstractHelper
     private function _writeToLog($file = null, $message = null): bool
     {
         try {
-            $now = $this->_objectManager->get(Date::class)->getDateNow()->format("Y-m-d h:i:s A T");
-            $logfile = $this->_objectManager->get(File::class)->getRootPath() . "/var/log/iods/$file.log";
+            $now = $this->_object_manager->get(Date::class)->getDateNow()->format("Y-m-d h:i:s A T");
+            $logfile = $this->_object_manager->get(File::class)->getRootPath() . "/var/log/iods/$file.log";
 
             return error_log("[$now] " . $message . "\n", 3, $logfile);
         } catch (\Throwable $e) {

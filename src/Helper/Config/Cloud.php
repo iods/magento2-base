@@ -9,5 +9,9 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Base\Helper;
+namespace Iods\Base\Helper\Config;
 
+class Cloud
+{
+    // ..
+}

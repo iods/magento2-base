@@ -10,7 +10,7 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Core\Helper;
+namespace Iods\Base\Helper\Config;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;

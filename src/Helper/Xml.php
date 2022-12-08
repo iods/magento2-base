@@ -9,17 +9,18 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Base\Helper\File;
+namespace Iods\Base\Helper;
 
 use DOMDocument;
-use Iods\Base\Helper\AbstractHelper;
 
+/**
+ * Class Xml
+ * @package Iods\Base\Helper\File
+ */
 class Xml extends AbstractHelper
 {
-    // ...
-
     /**
-     * Returns the DOM Document pretty formatted when called before saving and XML file.
+     * Returns the DOMDocument pretty formatted when called before saving.
      * @param DOMDocument $input
      * @return DOMDocument
      */

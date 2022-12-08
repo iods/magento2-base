@@ -29,6 +29,12 @@ class Database extends AbstractHelper
     /** @var ResourceConnection */
     protected ResourceConnection $_resource;
 
+    /**
+     * @param Context $context
+     * @param Log $log
+     * @param ObjectManagerInterface $objectManager
+     * @param ResourceConnection $resource
+     */
     public function __construct(
         Context $context,
         Log $log,
@@ -48,9 +54,6 @@ class Database extends AbstractHelper
      */
     public function getTableName($name = null): ?string
     {
-        // $table_name = null;
-        // $exists = false;
-
         try {
             $table_name = $this->_resource->getTableName($name);
             $exists = $this->_resource->getConnection()->isTableExists($table_name);
