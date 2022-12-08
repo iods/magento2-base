@@ -6,6 +6,7 @@
  * @author    Rye Miller <rye@drkstr.dev>
  * @copyright Copyright (c) 2021, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
+ * https://github.com/augustash/deployer-magento2-recipe
  */
 declare(strict_types=1);
 

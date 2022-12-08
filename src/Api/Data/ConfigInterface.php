@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Iods\Base\Api\Data;
 
+use Magento\Framework\Api\ExtensibleDataInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
@@ -19,28 +20,30 @@ use Magento\Store\Model\ScopeInterface;
 
 /**
  * Interface ConfigInterface
- * @package Iods\Base\Api
+ * @package Iods\Base\Api\Data
  */
-interface ConfigInterface
+interface ConfigInterface extends ExtensibleDataInterface
 {
     public const ENVIRONMENT_DEVELOPMENT = 'development';
-    public const ENVIRONMENT_LOCAL       = 'local';
-    public const ENVIRONMENT_PRODUCTION  = 'production';
-    public const ENVIRONMENT_STAGING     = 'staging';
+    public const ENVIRONMENT_LOCAL = 'local';
+    public const ENVIRONMENT_PRODUCTION = 'production';
+    public const ENVIRONMENT_STAGING = 'staging';
 
-    public const MODULE_CONFIG_PATH      = 'iods_base';
-    public const MODULE_NAME             = 'Iods_Base';
+    public const MODULE_CACHE_TAG = 'iods_base_cache';
+    public const MODULE_CONFIG_PATH = 'iods_base';
+    public const MODULE_NAME = 'Iods_Base';
     public const MODULE_SQL_UPDATE_LIMIT = 50000;
 
-    public const XML_PATH_API_URL         = 'api_url';
-    public const XML_PATH_API_MODE        = 'mode';
-    public const XML_PATH_DEBUG           = 'iods/general/debug';
+    public const XML_PATH_API_URL = 'api_url';
+    public const XML_PATH_API_MODE = 'mode';
+    public const XML_PATH_DEBUG = 'iods/general/debug';
     public const XML_PATH_DEFAULT_PATTERN = 'iods/general/%s';
-    public const XML_PATH_EXPORT          = 'iods/';
-    public const XML_PATH_LIVE_API_KEY    = 'live_api_key';
-    public const XML_PATH_MODULE_ENABLE   = 'iods/general/enable';
-    public const XML_PATH_MODULE_VERSION  = 'iods/general/version';
-    public const XML_PATH_TEST_API_KEY    = 'test_api_key';
+    public const XML_PATH_EXPORT = 'iods/';
+    public const XML_PATH_LIVE_API_KEY = 'live_api_key';
+    public const XML_PATH_MODULE_ENABLE = 'iods/general/enable';
+    public const XML_PATH_MODULE_VERSION = 'iods/general/version';
+    public const XML_PATH_TEST_API_KEY = 'test_api_key';
+
 
     /**
      * @return string

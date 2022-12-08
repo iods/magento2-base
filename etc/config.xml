@@ -18,27 +18,12 @@
     -->
     <default>
         <base>
-            <base_general>
-                <general_enable_self>1</general_enable_self>
-                <general_enable_developer>0</general_enable_developer>
-            </base_general>
-            <base_logging>
-                <logging_is_production>0</logging_is_production>
-                <logging_cleanup_period>30</logging_cleanup_period>
-            </base_logging>
-            <base_support>
-                <support_enabled>0</support_enabled>
-                <support_email>rye@drkstr.dev</support_email>
-                <support_whitelist_ip><![CDATA[
-127.0.0.1
-8.8.8.8
-192.168.0.1
-10.10.10.1
-                ]]></support_whitelist_ip>
-                <suppport_extended>0</suppport_extended>
-                <support_key>1A2B3C4D5E6F</support_key>
-                <support_statistics>0</support_statistics>
-            </base_support>
+            <base_config>
+                <base_config_enabled>1</base_config_enabled>
+                <base_config_enabled_debug>0</base_config_enabled_debug>
+                <base_config_api_url><![CDATA[https://status.thedarksociety.co]]></base_config_api_url>
+                <base_config_email>support@drkstr.dev</base_config_email>
+            </base_config>
         </base>
     </default>
 </config>

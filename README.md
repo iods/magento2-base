@@ -15,6 +15,17 @@ Facts
 Description
 -----------
 
+ * Provides main container for other Iods modules to extend from and utilize, including ACL
+ * Displays `APP_MODE` for developers working in multiple environments with store version and Magento version (quick reference)
+ * CRUD model for saving data and other packages to extend from
+ * System configuration entry with frontend display
+ * Installation scripts to install tables and insert sample data for the module
+ * Un-installation scripts to properly remove the extension
+ * Adminhtml UiComponent Form and Grids with admin entry management
+ * Fixes some Magento 2 issues w/ Plugins and Observers
+ * Cron for clearing X
+ * Report check and notify
+ * adds some helpers for other modules to use
 
 
 Requirements
