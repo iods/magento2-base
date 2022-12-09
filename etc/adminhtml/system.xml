@@ -21,132 +21,69 @@
      */
     -->
     <system>
+        <!-- default iods extension node -->
         <tab id="iods_base" translate="label" sortOrder="99999">
-            <label>Management</label>
+            <label><![CDATA[Apps]]></label>
         </tab>
 
         <section id="base" translate="label"
                  sortOrder="10"
                  showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>General</label>
+            <label><![CDATA[Basic]]></label>
             <tab>iods_base</tab>
-            <resource>Iods_Base::general</resource>
 
-            <group id="base_general" translate="label"
+            <resource>Iods_Base::config</resource>
+
+            <group id="base_config" translate="label"
                    sortOrder="10"
                    showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Configuration</label>
-                <field id="general_enable_self" translate="label comment tooltip" type="select"
-                       sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable</label>
+
+                <field id="base_config_enabled" translate="label comment" type="select"
+                       sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enabled]]></label>
+                    <config_path>base/base_config/base_config_enabled</config_path>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[
-                        Select <b>Yes</b> to enable this module.
+                        Select <b>No</b> to temporarily disable this module and all it's settings.
                     ]]></comment>
                 </field>
-                <field id="general_enable_developer" translate="label comment" type="select"
-                       sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Developer Module</label>
+
+                <field id="base_config_enabled_debug" translate="label comment tooltip" type="select"
+                       sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Debugging Enabled]]></label>
+                    <config_path>base/base_config/base_config_debug</config_path>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                     <comment><![CDATA[
                         Select <b>Enable</b> to use the iods Developer module for debugging and development help.
                     ]]></comment>
-                    <tooltip>The Developer module is a dependency of the Base and is already included, this just enables it.</tooltip>
+                    <tooltip>The debugging package will be downloaded and included in the `vendor` codebase.</tooltip>
                 </field>
-            </group>
 
-            <group id="base_logging" translate="label" type="text"
-                   sortOrder="30"
-                   showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Logging</label>
-                <field id="logging_is_production" translate="label comment tooltip" type="select"
-                       sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Is Production</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[
-                        Enable or disable based on the current environment (Staging vs. Production).
-                    ]]></comment>
-                    <tooltip>This is often checked and used for events and actions to confirm correct environment and key.</tooltip>
-                </field>
-                <field id="logging_cleanup_period" translate="label comment" type="text"
-                       sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Log Lifetime (days)</label>
-                    <comment>Timeframe between removal of any installed iods module logs.</comment>
-                    <validate>integer validate-not-negative-number</validate>
-                </field>
-                <field id="logging_public_key" translate="label" type="textarea"
-                       sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Public Key</label>
-                    <depends>
-                        <field id="base/base_logging/logging_is_production">1</field>
-                    </depends>
-                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-                    <can_be_empty>1</can_be_empty>
-                </field>
-            </group>
-
-            <group id="base_support" translate="label"
-                   sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label><![CDATA[Monitoring & Reporting]]></label>
-                <field id="support_enabled" translate="label" type="select"
-                       sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Reporting</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="support_email" translate="label comment tooltip"
-                       sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Support Email Address</label>
-                    <comment>Email address that will receive the level 1-3 notifications for opened issues.</comment>
-                    <tooltip>The email will only be contacted by the same alert system that contacts me. No one will contact you.</tooltip>
-                    <depends>
-                        <field id="base/base_support/support_enabled">1</field>
-                    </depends>
-                </field>
-                <field id="support_whitelist_ip" translate="label comment" type="textarea"
-                       sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <!-- config_path>iods/base/support_test_ip</config_path -->
-                    <label>Whitelisted IP Addresses</label>
-                    <comment><![CDATA[
-                        Enter each desired IP to be whitelisted on a new line. No separators, just line breaks.
-                    ]]></comment>
-                    <depends>
-                        <field id="base/base_support/support_enabled">1</field>
-                    </depends>
-                </field>
-                <field id="support_extended" translate="label comment tooltip" type="select"
-                       sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Extended Reporting</label>
-                    <depends>
-                        <field id="base/base_support/support_enabled">1</field>
-                    </depends>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[
-                        Weekly reports from Blackfire.io and New Relic.
-                    ]]></comment>
-                    <tooltip>Just adding things here to add to the core. No support offered.</tooltip>
-                </field>
-                <field id="support_key" translate="label comment tooltip" type="text"
-                       sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Support Key</label>
-                    <depends>
-                        <field id="base/base_support/support_enabled">1</field>
-                        <field id="base/base_support/support_extended">1</field>
-                    </depends>
+                <field id="base_config_api_url" translate="label comment" type="text"
+                       sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label><![CDATA[API URL]]></label>
+                    <config_path>base/base_config/base_config_api_url</config_path>
                     <validate>required-entry</validate>
                     <comment><![CDATA[
-                        Create your individual account <a href="https://ryemiller.io" target="blank">here</a>.
+                        The URL to generate notifications for status updates.
                     ]]></comment>
                 </field>
-                <field id="support_statistics" translate="label comment" type="select"
-                       sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Send Statistics</label>
-                    <comment><![CDATA[
-                        Help improve <a href="https://ryemiller.io" target="blank">iods</a> by sending anonymous usage statistics and data.
-                    ]]></comment>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+
+                <field id="base_config_email" translate="label comment" type="text"
+                       sortOrder="40"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Support Email Address</label>
+                    <config_path>base/base_config/base_config_email</config_path>
+                    <comment>Email address that will receive the level 1-3 notifications for opened issues.</comment>
                 </field>
+
             </group>
+
         </section>
     </system>
 </config>
