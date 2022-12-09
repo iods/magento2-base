@@ -103,7 +103,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
     }
 
     /**
-     * essentially is a custom-built object manager/factory
+     * essentially is a custom-built object manager
      * @param $class_name
      * @return mixed
      */

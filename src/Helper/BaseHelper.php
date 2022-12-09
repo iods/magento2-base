@@ -21,6 +21,11 @@ use Throwable;
  */
 class BaseHelper extends AbstractHelper
 {
+    /** @var File */
+    protected File $_file_helper;
+
+    /** @var Log */
+    protected Log $_log;
 
     /** @var ObjectManagerInterface */
     protected ObjectManagerInterface $_object_manager;
@@ -30,6 +35,8 @@ class BaseHelper extends AbstractHelper
         ObjectManagerInterface $objectManager
     ) {
         parent::__construct($context, $objectManager);
+        $this->_file_helper = $this->buildClassObject(File::class);
+        $this->_log = $this->buildClassObject(Log::class);
     }
 
     /*
@@ -39,12 +46,58 @@ class BaseHelper extends AbstractHelper
      * more of the helpers.
      */
 
+    public function getFileHelper(): File|null
+    {
+        return $this->_file_helper;
+    }
+
+    public function getBlockHtml($block_id = null): mixed
+    {
+        try {
+            $block = $this->buildClassObject('Magento\Cms\Block\Block');
+            $block->setBlockId($block_id);
+            $html = $block->toHtml();
+        } catch (Throwable $e) {
+            $this->_log->logError(__METHOD__, $e->getMessage());
+            $html = null;
+        } finally {
+            return $html;
+        }
+    }
+
+    public function buildClassObject($class_name = null): mixed
+    {
+        try {
+            $object = parent::buildClassObject($class_name);
+        } catch (Throwable $e) {
+            $this->_log->logError(__METHOD__, $e->getMessage());
+            $object = null;
+        } finally {
+            return $object;
+        }
+    }
+
+    public function displayBlock($id = null)
+    {
+        try {
+            $this->testOutput($this->getBlockHtml($id));
+        } catch (Throwable $e) {
+            $this->_log->logError(__METHOD__, $e->getMessage());
+        }
+    }
+
+    /**
+     * Wrap the output in a custom log, returning false by default.
+     * @param $output
+     * @return bool
+     */
     public function testOutput($output = null): bool
     {
         try {
             return parent::testOutput($output);
         } catch (Throwable $e) {
-            $this
+            $this->_log->logError(__METHOD__, $e->getMessage());
+            return false;
         }
     }
 }
