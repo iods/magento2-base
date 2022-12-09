@@ -1,5 +1,4 @@
-Base Module for Magento 2
-=========================
+<h1 align="center">Magento 2 Base Module</h1>
 
 Base module container for extending and testing general functionality across Magento 2.
 
@@ -7,9 +6,9 @@ Base module container for extending and testing general functionality across Mag
 Facts
 -----
 
- * Version: 1.1.1 (Development)
- * [Composer Package](https://packagist.org/packages/iods/module-core)
- * [Repository on Github](https://github.com/iods/magento2-core)
+ * Version: 0.1.1 (Development)
+ * [Composer Package](https://packagist.org/packages/iods/module-base)
+ * [Repository on Github](https://github.com/iods/magento2-base)
 
 
 Description
