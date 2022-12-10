@@ -28,7 +28,7 @@ ISSUES MISSING IMPORTANT INFORMATION MAY BE CLOSED WITHOUT INVESTIGATION.
 ## Environment
 
 <pre><code>
-iods/magento-core version: X.Y.Z
+iods/magento-base version: X.Y.Z
 Magento version: X.Y.Z 
 <!-- Check whether this is still an issue in the most recent Core version -->
  
