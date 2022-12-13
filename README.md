@@ -1,29 +1,22 @@
-<<<<<<< HEAD
 Magento 2 Base
 ==============
 
 The `Iods_Base` module is a core module container for extending and testing general functionality
-across Magento 2. Functionality provided by this module includes:
+across Magento 2. This includes some common files needed for registering the API as well as a few 
+components for understanding the overall Magento 2 API structure. 
+
+Functionality provided by this module includes:
 
  * A main container for additional modules to utilize, mainly Helpers
  * Adminhtml section for configuration support
 
 **This is a private module and is not currently maintained for public use.**
-=======
-<h1 align="center">Magento 2 Base</h1>
-
-A module container for extending and testing general functionality across Magento 2.
->>>>>>> 3f96519bff926ed372218d0a6765f0cea8726fdb
 
 
 Facts
 -----
 
-<<<<<<< HEAD
  * Version: 0.1.1 (Development)
-=======
- * Version: 000.2.1 (Development)
->>>>>>> 3f96519bff926ed372218d0a6765f0cea8726fdb
  * [Composer Package](https://packagist.org/packages/iods/module-base)
  * [Repository on Github](https://github.com/iods/magento2-base)
 
@@ -66,7 +59,6 @@ Working on this.
 
 ## Related Projects / Tickets / Stories
 
-<<<<<<< HEAD
 If you use your module internally, try to add links to related documentation covered in projects or tickets.
 
 * [#00000](https://yourProjectManagementSystem.com/yourTicketNumber) - Task Title goes here
@@ -216,7 +208,6 @@ If you have any issues with this project, open an issue on [Github](https://gith
  * [PHP v8.1+](http://php.net)
  * [Magento CE 2.4+](http://magento.com)
  * [Composer](http://getcomposer.org)
->>>>>>> 3f96519bff926ed372218d0a6765f0cea8726fdb
 
 
 Developer
