@@ -30,9 +30,9 @@
     "ext-libxml": "*"
   },
   "require-dev": {
-    "phpstan/extension-installer": "*",
-    "phpstan/phpstan": "*",
-    "phpstan/phpstan-phpunit": "*",
+    "phpstan/extension-installer": "1.2.*",
+    "phpstan/phpstan": "1.9.*",
+    "phpstan/phpstan-phpunit": "1.3.*",
     "phpunit/phpunit": "*",
     "composer/composer": "*@dev"
   },
