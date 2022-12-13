@@ -2,6 +2,7 @@
   "name": "iods/module-base",
   "description": "Base module container for extending and testing general functionality across Magento 2.",
   "type": "magento2-module",
+  "version": "0.1.1",
   "license": [
     "MIT"
   ],
@@ -20,12 +21,13 @@
     }
   },
   "require": {
-    "magento/framework": "*",
-    "magento/module-config": "*",
-    "magento/module-backend": "*",
-    "php": ">=8.1",
+    "php": "~8.1|~7.4|~7.3|~7.1|~7.0",
+    "magento/framework": "103.0.3-*",
+    "magento/module-config": "101.2.*",
+    "magento/module-backend": "102.0.*",
     "symfony/console": "*",
-    "ext-dom": "*"
+    "ext-dom": "*",
+    "ext-libxml": "*"
   },
   "require-dev": {
     "phpstan/extension-installer": "*",
@@ -42,7 +44,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Iods\\Core\\Tests\\Unit\\": "tests/unit"
+      "Iods\\Base\\Test\\Unit\\": "test/Unit"
     }
   },
   "scripts": {
@@ -53,7 +55,6 @@
     "phpstan": "phpstan analyse",
     "phpunit": "phpunit --no-coverage"
   },
-  "version": "1.1.1",
   "config": {
     "allow-plugins": {
       "phpstan/extension-installer": true,

@@ -28,12 +28,11 @@ class Handler extends Base
      * Log file name
      * @var string
      */
-    protected $fileName = '/var/log/iods/base.log';
+    // protected $fileName = 'iods/base.log';
 
     public function __construct(
         DateTime $dateTime,
         DriverInterface $fileSystem,
-        $fileName = null,
         $filePath = null
     ) {
         $filename = 'iods-' . $dateTime->gmtDate('d-m=Y', $dateTime->timestamp()) . '.log';
