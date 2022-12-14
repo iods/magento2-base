@@ -2,8 +2,8 @@ Magento 2 Base
 ==============
 
 The `Iods_Base` module is a core module container for extending and testing general functionality
-across Magento 2. This includes some common files needed for registering the API as well as a few 
-components for understanding the overall Magento 2 API structure. 
+across Magento 2. This includes some common files needed for registering the module as well as a few 
+components for understanding the overall Magento 2 module structure. 
 
 Functionality provided by this module includes:
 
@@ -203,7 +203,7 @@ Support
 -------
 
 If you have any issues with this project, open an issue on [Github](https://github.com/iods/magento2-bones/issues)
-=======
+
  * [Git](http://git-scm.com)
  * [PHP v8.1+](http://php.net)
  * [Magento CE 2.4+](http://magento.com)
