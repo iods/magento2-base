@@ -13,5 +13,7 @@ namespace Iods\Base\Helper\Config;
 
 class Deploy
 {
-    // ..
+    const MODULE_NAME = 'Iods_Base';
+
+    const CONFIG_XML_ENVIRONMENT = 'DEPLOY';
 }

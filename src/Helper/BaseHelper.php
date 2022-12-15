@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
+use Magento\Backend\App\Config;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\ObjectManagerInterface;
 use Throwable;
@@ -21,6 +22,9 @@ use Throwable;
  */
 class BaseHelper extends AbstractHelper
 {
+    /** @var Config */
+    protected Config $_config;
+
     /** @var File */
     protected File $_file_helper;
 
@@ -39,18 +43,24 @@ class BaseHelper extends AbstractHelper
         $this->_log = $this->buildClassObject(Log::class);
     }
 
+
     /*
      * We build the base helper with some smaller helpers to
      * limit the overage of all the code shits
      * then the base one can be extended if it uses two or
      * more of the helpers.
      */
-
     public function getFileHelper(): File|null
     {
         return $this->_file_helper;
     }
 
+
+
+    /**
+     * @param $block_id
+     * @return mixed
+     */
     public function getBlockHtml($block_id = null): mixed
     {
         try {
@@ -60,11 +70,15 @@ class BaseHelper extends AbstractHelper
         } catch (Throwable $e) {
             $this->_log->logError(__METHOD__, $e->getMessage());
             $html = null;
-        } finally {
-            return $html;
         }
+        return $html;
     }
 
+
+    /**
+     * @param $class_name
+     * @return mixed
+     */
     public function buildClassObject($class_name = null): mixed
     {
         try {
@@ -77,7 +91,12 @@ class BaseHelper extends AbstractHelper
         }
     }
 
-    public function displayBlock($id = null)
+
+    /**
+     * @param $id
+     * @return void
+     */
+    public function displayBlock($id = null): void
     {
         try {
             $this->testOutput($this->getBlockHtml($id));
@@ -85,6 +104,7 @@ class BaseHelper extends AbstractHelper
             $this->_log->logError(__METHOD__, $e->getMessage());
         }
     }
+
 
     /**
      * Wrap the output in a custom log, returning false by default.

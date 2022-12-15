@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
+use Exception;
+use Magento\Framework\App\Area;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\App\State;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\DataObject;
 use Throwable;
@@ -22,6 +25,9 @@ use Throwable;
  */
 abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /** @var array */
+    protected array $_is_area = [];
+
     /** @var ObjectManagerInterface */
     protected ObjectManagerInterface $_object_manager;
 
@@ -37,6 +43,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         $this->_object_manager = $object_manager;
     }
 
+
     /**
      * specify the sort column and column direction
      * @param array $data
@@ -48,6 +55,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
     {
         $this->getDataSortByColumns($data, $col, $direction);
     }
+
 
     /**
      * specify the sort columns and direction
@@ -62,6 +70,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
     {
         $this->getDataSortByColumns($data, $col, $dir, $colTwo, $dirTwo);
     }
+
 
     /**
      * presort some columns.
@@ -102,6 +111,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         }
     }
 
+
     /**
      * essentially is a custom-built object manager
      * @param $class_name
@@ -117,6 +127,41 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
             return $object;
         }
     }
+
+
+    /**
+     * Returns false if the area is Adminhtml.
+     * @return bool
+     */
+    public function isAreaAdminhtml(): bool
+    {
+        return $this->isArea(Area::AREA_ADMINHTML);
+    }
+
+
+    /**
+     * Returns true or false whether in an area or not. Default being FRONTEND.
+     * @param string $area
+     * @return bool|mixed
+     */
+    public function isArea(string $area = Area::AREA_FRONTEND): mixed
+    {
+        if (!isset($this->_is_area[$area])) {
+
+            // load this through ol
+            /** @var State $state */
+            $state = $this->_object_manager->get(State::class);
+
+            try {
+                $this->_is_area[$area] = ($state->getAreaCode() == $area);
+            } catch (Exception $e) {
+                $this->_is_area[$area] = false;
+            }
+        }
+
+        return $this->_is_area[$area];
+    }
+
 
     /**
      * returns true, and some output (that is provided)
@@ -134,6 +179,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
             return false;
         }
     }
+
 
     /**
      * returns the value of a defined key from an array (very useful)

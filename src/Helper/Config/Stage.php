@@ -13,5 +13,17 @@ namespace Iods\Base\Helper\Config;
 
 class Stage
 {
-    // ...
+    const MODULE_NAME = 'Iods_Base';
+
+    /*
+     * Each class holds each environment's settings
+     * each environment is set to an app mode
+     * if the app mode is not set the environment setting is not applied
+     * 
+     * each class holds custom functions loaded with the codebase but only
+     * in the environment they are needed and will only run if the scope
+     * is applied in it.
+     */
+
+    const CONFIG_XML_ENVIRONMENT = 'STAGE';
 }

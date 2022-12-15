@@ -11,64 +11,88 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
-use Exception;
 use Magento\Backend\App\Config;
 use Magento\Backend\App\ConfigInterface;
-use Magento\Framework\App\Area;
-use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\App\State;
-use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class Data
  * @package Iods\Core\Helper
  */
-class Data extends AbstractHelper
+class Data extends BaseHelper
 {
-    const MODULE_CONFIG_PATH = 'iods_core';
+    const MODULE_CONFIG_PATH = 'base';
 
+    /**
+     * @TODO write a description for the method.
+     * @param $path
+     * @param $scope_code
+     * @return bool
+     */
+    public function getConfigFlag($path = null, $scope_code = null): bool
+    {
+        try {
+            $is_set = $this->scopeConfig->isSetFlag($path, ScopeInterface::SCOPE_STORE, $scope_code);
+        } catch (\Throwable $e) {
+            $this->_log->logError(__METHOD__, $e->getMessage());
+            $is_set = false;
+        } finally {
+            return $is_set;
+        }
+    }
 
-    protected Config $_config;
+    /**
+     * @TODO write a description for the method.
+     * @param $path
+     * @param $scope_code
+     * @return mixed|null
+     */
+    public function getConfigValue($path = null, $scope_code = null): mixed
+    {
+        try {
+            $value = $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE, $scope_code);
+        } catch (\Throwable $e) {
+            $this->_log->logError(__METHOD__, $e->getMessage());
+            $value = null;
+        } finally {
+            return $value;
+        }
+    }
 
-    protected array $_isArea = [];
+    /**
+     * @TODO write a description for the method.
+     * @param $field
+     * @param $scope_value
+     * @param string $scope_type
+     * @return array|mixed
+     */
+    public function getConfigsValue($field, $scope_value = null, string $scope_type = ScopeInterface::SCOPE_STORE): mixed
+    {
+        if ($scope_value === null && !$this->isArea()) {
 
-    protected ObjectManagerInterface $_objectManager;
-
-    protected StoreManagerInterface $_storeManager;
-
-    private $_utcConverter;
-
-    private $_timezone;
-
-
-
-
-    public function __construct(
-        Context $context,
-        ObjectManagerInterface $objectManager,
-        StoreManagerInterface $storeManager
-    ) {
-        $this->_objectManager = $objectManager;
-        $this->_storeManager = $storeManager;
-        parent::__construct($context);
+            /** @var Config $_config */
+            $this->_config = $this->_object_manager->get(ConfigInterface::class);
+            return $this->_config->getValue($field);
+        }
+        // return $this->_config->getValue($field, $scope_type, $scope_value);
+        return $this->scopeConfig->getValue($field, $scope_type, $scope_value);
     }
 
 
-    public function getGeneralConfig($code = '', $storeId = '')
+
+    public function getBaseConfig($code = '', $storeId = '')
     {
         $code = ($code !== '') ? '/' . $code : '';
-        return $this->getConfigValue(static::MODULE_CONFIG_PATH . '/general' . $code, $storeId);
+        return $this->getConfigsValue(static::MODULE_CONFIG_PATH . '/base_config' . $code, $storeId);
     }
 
 
     public function getModuleConfig($field = '', $storeId = '')
     {
         $field = ($field !== '') ? '/' . $field : '';
-        return $this->getConfigValue(static::MODULE_CONFIG_PATH . $field, $storeId);
+        return $this->getConfigsValue(static::MODULE_CONFIG_PATH . $field, $storeId);
     }
+
 
 
 
@@ -82,38 +106,4 @@ class Data extends AbstractHelper
     }
 
 
-
-
-    public function getConfigValue($field, $scopeValue = null, $scopeType = ScopeInterface::SCOPE_STORE)
-    {
-        if ($scopeValue === null && !$this->isArea()) {
-            /** @var Config $_config */
-            if (!$this->_config) {
-                $this->_config = $this->_objectManager->get(ConfigInterface::class);
-            }
-            return $this->_config->getValue($field);
-        }
-        return $this->scopeConfig->getValue($field, $scopeType, $scopeValue);
-    }
-
-
-    public function isAdmin(): bool
-    {
-        return $this->isArea(Area::AREA_ADMINHTML);
-    }
-
-
-    public function isArea($area = Area::AREA_FRONTEND)
-    {
-        if (!isset($this->_isArea[$area])) {
-            /** @var State $state */
-            $state = $this->_objectManager->get(State::class);
-            try {
-                $this->isArea[$area] = ($state->getAreaCode() == $area);
-            } catch (Exception $e) {
-                $this->_isArea[$area] = false;
-            }
-        }
-        return $this->_isArea[$area];
-    }
 }
