@@ -68,21 +68,15 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
     }
 
     /**
-     * Returns true if data is available to output and dumps the data.
-     *
-     * This is especially useful in templates (.phtml) because it both validates that
-     * the information was received (bool) and able to render.
-     * @param $output
-     * @return bool
+     * @param float $num
+     * @param int $dec
+     * @param string $sep
+     * @param string $sep_thousands
+     * @return string
      */
-    public function testOutput($output = null): bool
+    public function formatNumber(float $num = 0.00, int $dec = 2, string $sep = ".", string $sep_thousands = ","): string
     {
-        try {
-            print_r($output);
-            return true;
-        } catch (Throwable $e) {
-            return false;
-        }
+        return number_format($num, $dec, $sep, $sep_thousands);
     }
 
     /**
@@ -141,6 +135,24 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
             $params[] = &$data;
             call_user_func_array('array_multisort', $params);
             $data = array_pop($params);
+        }
+    }
+
+    /**
+     * Returns true if data is available to output and dumps the data.
+     *
+     * This is especially useful in templates (.phtml) because it both validates that
+     * the information was received (bool) and able to render.
+     * @param $output
+     * @return bool
+     */
+    public function testOutput($output = null): bool
+    {
+        try {
+            print_r($output);
+            return true;
+        } catch (Throwable $e) {
+            return false;
         }
     }
 }
