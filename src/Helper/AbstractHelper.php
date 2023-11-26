@@ -4,17 +4,14 @@
  *
  * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2023, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
-use Exception;
-use Magento\Framework\App\Area;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\App\State;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\DataObject;
 use Throwable;
@@ -25,10 +22,9 @@ use Throwable;
  */
 abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    /** @var array */
-    protected array $_is_area = [];
-
-    /** @var ObjectManagerInterface */
+    /**
+     * @var ObjectManagerInterface
+     */
     protected ObjectManagerInterface $_object_manager;
 
     /**
@@ -39,13 +35,51 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         Context $context,
         ObjectManagerInterface $object_manager
     ) {
-        parent::__construct($context);
         $this->_object_manager = $object_manager;
+        parent::__construct($context);
     }
 
+    /**
+     * Returns the value of a defined key from an array.
+     * @param array $arr
+     * @param int $index
+     * @param null $default
+     * @return mixed|null
+     */
+    protected function _getArrayValue(array $arr = [], int $index = 0, $default = null): mixed
+    {
+        return $arr[$index] ?? $default;
+    }
 
     /**
-     * specify the sort column and column direction
+     * Returns an instance of the desired object; like a custom Object Manager.
+     * @param $class_name
+     * @return mixed
+     */
+    public function buildClassObject($class_name = null): mixed
+    {
+        try {
+            $object = $this->_object_manager->get($class_name);
+        } catch (Throwable $e) {
+            $object = $this->_object_manager->create(DataObject::class);
+        } finally {
+            return $object;
+        }
+    }
+
+    /**
+     * @param float $num
+     * @param int $dec
+     * @param string $sep
+     * @param string $sep_thousands
+     * @return string
+     */
+    public function formatNumber(float $num = 0.00, int $dec = 2, string $sep = ".", string $sep_thousands = ","): string
+    {
+        return number_format($num, $dec, $sep, $sep_thousands);
+    }
+
+    /**
      * @param array $data
      * @param string $col
      * @param int $direction
@@ -56,9 +90,7 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         $this->getDataSortByColumns($data, $col, $direction);
     }
 
-
     /**
-     * specify the sort columns and direction
      * @param array $data
      * @param string $col
      * @param int $dir
@@ -71,9 +103,8 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         $this->getDataSortByColumns($data, $col, $dir, $colTwo, $dirTwo);
     }
 
-
     /**
-     * presort some columns.
+     * Presort any available columns before loading.
      * @param array $data
      * @param ...$args
      * @return void
@@ -86,16 +117,12 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         foreach ($args as $arg) {
             switch (true) {
                 case is_string($arg):
-                    $col = array_column($data, $arg);
-                    switch (count($col) > 0) {
-                        case true:
-                            $params[] = $col;
-                            $is_empty = false;
-                            break;
-
-                        case false:
-                            $is_empty = true;
-                            break;
+                    $column = array_column($data, $arg);
+                    if (count($column) > 0) {
+                        $params[] = $column;
+                        $is_empty = false;
+                    } else {
+                        $is_empty = true;
                     }
                     break;
                 case is_numeric($arg):
@@ -111,85 +138,21 @@ abstract class AbstractHelper extends \Magento\Framework\App\Helper\AbstractHelp
         }
     }
 
-
     /**
-     * essentially is a custom-built object manager
-     * @param $class_name
-     * @return mixed
-     */
-    public function buildClassObject($class_name = null): mixed
-    {
-        try {
-            $object = $this->_object_manager->get($class_name);
-        } catch (Throwable $e) {
-            $object = $this->_object_manager->create(DataObject::class);
-        } finally {
-            return $object;
-        }
-    }
-
-
-    /**
-     * Returns false if the area is Adminhtml.
-     * @return bool
-     */
-    public function isAreaAdminhtml(): bool
-    {
-        return $this->isArea(Area::AREA_ADMINHTML);
-    }
-
-
-    /**
-     * Returns true or false whether in an area or not. Default being FRONTEND.
-     * @param string $area
-     * @return bool|mixed
-     */
-    public function isArea(string $area = Area::AREA_FRONTEND): mixed
-    {
-        if (!isset($this->_is_area[$area])) {
-
-            // load this through ol
-            /** @var State $state */
-            $state = $this->_object_manager->get(State::class);
-
-            try {
-                $this->_is_area[$area] = ($state->getAreaCode() == $area);
-            } catch (Exception $e) {
-                $this->_is_area[$area] = false;
-            }
-        }
-
-        return $this->_is_area[$area];
-    }
-
-
-    /**
-     * returns true, and some output (that is provided)
+     * Returns true if data is available to output and dumps the data.
+     *
+     * This is especially useful in templates (.phtml) because it both validates that
+     * the information was received (bool) and able to render.
      * @param $output
      * @return bool
      */
     public function testOutput($output = null): bool
     {
-        // in templates (knowing that you received it, and that it is not just
-        // displaying, or that it aint there baby) this works really nice :)
         try {
             print_r($output);
             return true;
         } catch (Throwable $e) {
             return false;
         }
-    }
-
-
-    /**
-     * returns the value of a defined key from an array (very useful)
-     * @param array $arr
-     * @param int $k
-     * @param $default
-     * @return mixed
-     */
-    protected function _getArrayValue(array $arr = [], int $k = 0, $default = null): mixed
-    {
-        return $arr[$k] ?? $default;
     }
 }

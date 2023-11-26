@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
-class Text extends AbstractHelper
+class Store extends AbstractData
 {
-    // ..
+
 }

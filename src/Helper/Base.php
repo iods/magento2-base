@@ -20,7 +20,7 @@ use Throwable;
  * Class BaseHelper
  * @package Iods\Base\Helper
  */
-class BaseHelper extends AbstractHelper
+class Base extends AbstractData
 {
     /** @var Config */
     protected Config $_config;
