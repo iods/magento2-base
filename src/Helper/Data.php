@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
+use Iods\Base\Helper\BaseHelper;
 use Magento\Backend\App\Config;
 use Magento\Backend\App\ConfigInterface;
 use Magento\Store\Model\ScopeInterface;

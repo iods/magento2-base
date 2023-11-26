@@ -4,15 +4,14 @@
  *
  * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2023, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 declare(strict_types=1);
 
-use Magento\Framework\Component\ComponentRegistrar;
+namespace Iods\Base\Helper;
 
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Iods_Base',
-    __DIR__
-);
+class Store extends AbstractData
+{
+
+}
