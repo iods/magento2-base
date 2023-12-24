@@ -23,8 +23,13 @@
                     <resource id="Magento_Backend::stores_settings" title="Stores Settings">
                         <resource id="Magento_Config::config" title="Config">
 
+<<<<<<< HEAD
                             <resource id="Iods_Hello::apps" title="Dark Society Apps">
                                 <resource id="Iods_Base::config" title="Base Configuration Section" sortOrder="20" />
+=======
+                            <resource id="Iods_Base::settings" title="ioDS Apps Section" sortOrder="50">
+                                <resource id="Iods_Base::config" title="Base Settings Section" sortOrder="10" />
+>>>>>>> ef6260fbcfa374b042cc55bf7fb5033ae052f56f
                             </resource>
 
                         </resource>
