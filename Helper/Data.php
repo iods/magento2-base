@@ -11,11 +11,6 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
-<<<<<<< HEAD:Helper/Data.php
-use Iods\Base\Helper\Base;
-=======
-use Iods\Base\Helper\BaseHelper;
->>>>>>> ef6260fbcfa374b042cc55bf7fb5033ae052f56f:src/Helper/Data.php
 use Magento\Backend\App\Config;
 use Magento\Backend\App\ConfigInterface;
 use Magento\Store\Model\ScopeInterface;
