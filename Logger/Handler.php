@@ -25,11 +25,10 @@ class Handler extends Base
     protected $loggerType = Logger::INFO;
 
     /**
-     * Log file name
-     * @var string
+     * @param DateTime $dateTime
+     * @param DriverInterface $fileSystem
+     * @param $filePath
      */
-    // protected $fileName = 'iods/base.log';
-
     public function __construct(
         DateTime $dateTime,
         DriverInterface $fileSystem,

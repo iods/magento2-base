@@ -14,13 +14,14 @@ namespace Iods\Base\Helper;
 use Magento\Backend\App\Config;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Throwable;
 
 /**
  * Class BaseHelper
  * @package Iods\Base\Helper
  */
-class BaseHelper extends AbstractHelper
+class Base extends AbstractData
 {
     /** @var Config */
     protected Config $_config;
@@ -34,11 +35,15 @@ class BaseHelper extends AbstractHelper
     /** @var ObjectManagerInterface */
     protected ObjectManagerInterface $_object_manager;
 
+    /** @var StoreManagerInterface */
+    protected StoreManagerInterface $_store_manager;
+
     public function __construct(
         Context $context,
-        ObjectManagerInterface $objectManager
+        ObjectManagerInterface $objectManager,
+        StoreManagerInterface $store_manager
     ) {
-        parent::__construct($context, $objectManager);
+        parent::__construct($context, $objectManager, $store_manager);
         $this->_file_helper = $this->buildClassObject(File::class);
         $this->_log = $this->buildClassObject(Log::class);
     }

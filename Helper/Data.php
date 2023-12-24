@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Iods\Base\Helper;
 
+use Iods\Base\Helper\Base;
 use Magento\Backend\App\Config;
 use Magento\Backend\App\ConfigInterface;
 use Magento\Store\Model\ScopeInterface;
@@ -19,7 +20,7 @@ use Magento\Store\Model\ScopeInterface;
  * Class Data
  * @package Iods\Core\Helper
  */
-class Data extends BaseHelper
+class Data extends Base
 {
     const MODULE_CONFIG_PATH = 'base';
 

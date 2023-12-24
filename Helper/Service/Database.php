@@ -9,8 +9,10 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Base\Helper;
+namespace Iods\Base\Helper\Service;
 
+use Iods\Base\Helper\AbstractHelper;
+use Iods\Base\Helper\Log;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\ObjectManagerInterface;

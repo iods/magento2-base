@@ -11,17 +11,13 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <!--
-    /*
-     * Notes: @TODO
-     */
-    -->
+
     <default>
         <base>
             <base_config>
                 <base_config_enabled>1</base_config_enabled>
                 <base_config_enabled_debug>0</base_config_enabled_debug>
-                <base_config_api_url><![CDATA[https://status.thedarksociety.co]]></base_config_api_url>
+                <base_config_api_url><![CDATA[https://status.thedarksociety.io]]></base_config_api_url>
                 <base_config_email>support@drkstr.dev</base_config_email>
             </base_config>
         </base>

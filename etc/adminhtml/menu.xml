@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * A [very] opinionated guide for the right and wrong things in Magento 2
+ *
+ * @package   Iods\Hello
+ * @author    Rye Miller <rye@drkstr.dev>
+ * @copyright Copyright (c) 2022, Rye Miller (http://ryemiller.io)
+ * @license   See LICENSE file for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+
+    <menu>
+        <add id="Iods_Base::base_menu"
+             title="Developer"
+             module="Iods_Base"
+             sortOrder="70"
+             resource="Iods_Base::base" />
+        <add id="Iods_Base::base_one"
+             title="Configuration"
+             module="Iods_Base"
+             sortOrder="10"
+             resource="Iods_Base::base"
+             parent="Iods_Base::base_menu"/>
+        <add id="Iods_Base::base_config"
+             title="Configuration"
+             module="Iods_Base"
+             sortOrder="20"
+             resource="Iods_Base::base"
+             parent="Iods_Base::base_menu" />
+        <add id="Iods_Base::base_base"
+             title="Base"
+             module="Iods_Base"
+             sortOrder="30"
+             action="adminhtml/system_config/edit/section/base"
+             resource="Iods_Base::base"
+             parent="Iods_Base::base_config" />
+
+        <remove id="Magento_Marketplace::partners" />
+    </menu>
+</config>
+

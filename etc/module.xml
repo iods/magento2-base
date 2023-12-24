@@ -11,11 +11,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <!--
-    /*
-     * Notes: @TODO
-     */
-    -->
+
     <module name="Iods_Base" setup_version="0.1.1" schema_version="0.1.1" data_version="0.1.1">
         <sequence>
             <module name="Magento_Analytics" />
@@ -27,6 +23,7 @@
             <module name="Magento_Indexer" />
             <module name="Magento_Store" />
             <module name="Magento_Theme" />
+            <module name="Iods_Hello" />
         </sequence>
     </module>
 </config>

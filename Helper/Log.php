@@ -13,19 +13,33 @@ namespace Iods\Base\Helper;
 
 class Log extends AbstractHelper
 {
-    // default error type for the base log (before bunyan)
+    /**
+     * @param $method
+     * @param $message
+     * @return bool
+     */
     public function logError($method = null, $message = null): bool
     {
         return $this->printToLog('error', "$method :: $message");
     }
 
-    // function to print a log (param for type, message)
-    public function printToLog($file = null, $message = null)
+    /**
+     * Function to print to a log.
+     * @param $file
+     * @param $message
+     * @return bool
+     */
+    public function printToLog($file = null, $message = null): bool
     {
         return $this->_writeToLog($file, $message);
     }
 
-    // write message to a log
+    /**
+     * Writes a message to a log.
+     * @param $file
+     * @param $message
+     * @return bool
+     */
     private function _writeToLog($file = null, $message = null): bool
     {
         try {
