@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [Unreleased]
 ------------
 
+## [1.2.3] - 2023-12-24
+### Added
+- Admin menu for Developer
+### Updated
+- Helpers
+- API interfaces
+
+
 ## [1.2.1] - 2023-07-04
 ### Added
  - Merge branch 'release/1.2.1'
