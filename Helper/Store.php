@@ -9,15 +9,9 @@
  */
 declare(strict_types=1);
 
-namespace Iods\Base\Exception;
+namespace Iods\Base\Helper;
 
-use Exception;
-
-/**
- * Class Exception
- * @package Iods\Base
- */
-class BaseException extends Exception
+class Store extends AbstractData
 {
-    // ..
+
 }

@@ -1,0 +1,41 @@
+name: run tests
+
+on:
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    static:
+        name: M2 Coding Standard
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: extdn/github-actions-m2/magento-coding-standard@master
+
+    run-linters:
+        name: Run linters
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+
+            # ESLint and Prettier must be in `package.json`
+            - name: Install Node.js dependencies
+              run: npm ci
+
+            - name: Run linters
+              uses: github/super-linter/slim@v5
+              env:
+                  VALIDATE_ALL_CODEBASE: true
+                  DEFAULT_BRANCH: main
+                  GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+                  VALIDATE_JAVASCRIPT_ES: true
+                  VALIDATE_JAVASCRIPT_STANDARD: true
+                  LINTER_RULES_PATH: /
+                  JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json

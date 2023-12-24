@@ -9,10 +9,12 @@
  */
 declare(strict_types=1);
 
-use Magento\Framework\Component\ComponentRegistrar;
+namespace Iods\Base\Helper\Config;
 
-ComponentRegistrar::register(
-    ComponentRegistrar::MODULE,
-    'Iods_Base',
-    __DIR__
-);
+class Module
+{
+    public const MODULE_NAME = 'Iods_Base';
+
+    public const CONFIG_XML_PATH_SECTION = 'base';
+    public const CONFIG_XML_PATH_GROUP = 'base_config';
+}

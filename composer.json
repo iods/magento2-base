@@ -3,6 +3,7 @@
   "description": "Base module container for extending and testing general functionality across Magento 2.",
   "type": "magento2-module",
   "version": "0.1.1",
+  "homepage": "https://ryemiller.io",
   "license": [
     "MIT"
   ],
@@ -10,6 +11,7 @@
     {
       "name": "Rye Miller",
       "email": "rye@drkstr.dev",
+      "role": "Developer",
       "homepage": "https://ryemiller.io"
     }
   ],
@@ -21,8 +23,8 @@
     }
   },
   "require": {
-    "php": "~8.1|~8.0|~7.4|~7.3",
-    "magento/framework": "103.0.*",
+    "php": "~8.2.0|~8.1.0|~8.0.0|~7.4.0",
+    "magento/framework": "^103.0",
     "magento/module-config": "*",
     "magento/module-backend": "*",
     "symfony/console": "*",
@@ -39,7 +41,8 @@
   "autoload": {
     "files": ["registration.php"],
     "psr-4": {
-      "Iods\\Base\\": "src"
+      "Iods\\Base\\": "",
+      "Iods\\Base\\Test": "test/"
     }
   },
   "autoload-dev": {

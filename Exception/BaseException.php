@@ -4,16 +4,20 @@
  *
  * @package   Iods\Base
  * @author    Rye Miller <rye@drkstr.dev>
- * @copyright Copyright (c) 2022, Rye Miller (https://ryemiller.io)
+ * @copyright Copyright (c) 2023, Rye Miller (https://ryemiller.io)
  * @license   See LICENSE for license details.
  */
 declare(strict_types=1);
 
-namespace Iods\Base\Helper\Config;
+namespace Iods\Base\Exception;
 
-class Cloud
+use Exception;
+
+/**
+ * Class Exception
+ * @package Iods\Base
+ */
+class BaseException extends Exception
 {
-    const MODULE_NAME = 'Iods_Base';
-
-    const CONFIG_XML_ENVIRONMENT = 'COMMERCE_CLOUD';
+    // ..
 }

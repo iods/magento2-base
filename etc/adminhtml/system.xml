@@ -11,27 +11,14 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
-    <!--
-    /**
-     * Notes: Base module defines tabs, everything else extends and hooks into it.
-     *
-     * 1. Organization is important. {Vendor_Tab}
-     *
-     * https://experienceleague.adobe.com/docs/commerce-operations/configuration-guide/files/config-reference-systemxml.html
-     */
-    -->
-    <system>
-        <!-- default iods extension node -->
-        <tab id="iods_base" translate="label" sortOrder="99999">
-            <label><![CDATA[Apps]]></label>
-        </tab>
 
+    <system>
         <section id="base" translate="label"
                  sortOrder="10"
                  showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label><![CDATA[Basic]]></label>
-            <tab>iods_base</tab>
+            <label><![CDATA[Base]]></label>
+            <tab>iods_hello</tab>
 
             <resource>Iods_Base::config</resource>
 
